@@ -123,15 +123,15 @@
                         android:padding="10dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="7"
+                            android:layout_weight="8"
                             android:text="Medicatie" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
+                            android:layout_weight="2"
                             android:text="Tijdstip" />
                     </TableRow>
 
@@ -141,17 +141,20 @@
 
                         <TextView
                             style="@style/doorlopendeTekstGroter"
-                            android:layout_width="wrap_content"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="7"
-                            android:text="Medicatie 1" />
+                            android:layout_weight="8"
+                            android:text="Nurofen voor Kinderen Sinaasappel 100 mg, kauwcapsules, zacht" />
 
                         <TextView
                             style="@style/doorlopendeTekstGroter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:text="8u00" />
+                            android:layout_weight="2"
+                            android:text="8u00"
+                            />
+
+
                     </TableRow>
 
                     <View
@@ -165,16 +168,16 @@
 
                         <TextView
                             style="@style/doorlopendeTekstGroter"
-                            android:layout_width="wrap_content"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="7"
+                            android:layout_weight="8"
                             android:text="Medicatie 2" />
 
                         <TextView
                             style="@style/doorlopendeTekstGroter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
+                            android:layout_weight="2"
                             android:text="18u00" />
 
 
