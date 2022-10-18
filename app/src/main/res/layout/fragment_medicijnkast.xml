@@ -122,6 +122,20 @@
                             app:layout_constraintStart_toStartOf="@+id/vervaldatumLabel"
                             app:layout_constraintTop_toBottomOf="@+id/vervaldatumLabel" />
 
+                        <CheckBox
+                            android:id="@+id/checkBox"
+                            style="@style/vetteGroeneTekst"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="-8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:buttonTint="@color/green"
+                            android:text="Dagelijkse medicatie"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/vervaldatum"
+                            app:layout_constraintTop_toBottomOf="@+id/vervaldatum" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -178,13 +192,11 @@
                             android:id="@+id/btnVerwijderMedicijn"
                             android:layout_width="36dp"
                             android:layout_height="35dp"
-                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="16dp"
                             android:onClick="@{() -> medicijnkastViewModel.btnVerwijderMedicijnClicked()}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/meerInfoMedicijn"
                             app:srcCompat="@drawable/vuilbak_icon" />
 
                         <Button
@@ -193,10 +205,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="13dp"
-                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="16dp"
                             android:onClick="@{() -> medicijnkastViewModel.btnMeerInfoClicked()}"
                             android:text="Meer info"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/kiesAantalDosissen" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
