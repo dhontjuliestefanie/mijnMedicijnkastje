@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="medicijnListViewModel"
+            type="com.example.mijnmedicijnkastje.screens.medicijnList.MedicijnListViewModel" />
+    </data>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".MedicijnActivity">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/zelfMedAanmaken"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/border_shadow"
+            android:orientation="vertical"
+            android:padding="25dp"
+            app:layout_constraintDimensionRatio="1:1">
+
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/grey"
+                android:paddingEnd="65dp"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:fontFamily="@font/lato"
+                app:layout_constraintTop_toTopOf="parent"
+                app:queryHint="@string/edit_text_hint"
+                tools:layout_editor_absoluteX="25dp" />
+
+            <TextView
+                android:id="@+id/zoekresultatenLbl"
+                style="@style/titelHoofdletterExtraWit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/zoekresultaten"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchView2" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/medicijn1"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_shadow"
+                android:onClick="@{() -> medicijnListViewModel.btnNavigateToMedicijnDetailClicked()}"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/zoekresultatenLbl">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="154dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/pil"></androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/naamMedicijnCard"
+                            style="@style/cardViewMedicijn"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@{medicijnListViewModel.naam}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/registratienummerLabel"
+                            style="@style/labelVet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/registratienummer"
+                            app:layout_constraintStart_toStartOf="@+id/naamMedicijnCard"
+                            app:layout_constraintTop_toBottomOf="@+id/naamMedicijnCard" />
+
+                        <TextView
+                            android:id="@+id/registratienummer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{medicijnListViewModel.registratienummer}"
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/lato"
+                            app:layout_constraintStart_toStartOf="@+id/registratienummerLabel"
+                            app:layout_constraintTop_toBottomOf="@+id/registratienummerLabel" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/medicijn2"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_shadow"
+                android:onClick="@{() -> medicijnListViewModel.btnNavigateToMedicijnDetailClicked()}"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/medicijn1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="154dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/pil"></androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/naamMedicijnCard2"
+                            style="@style/cardViewMedicijn"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@{medicijnListViewModel.naam}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/registratienummerLabel2"
+                            style="@style/labelVet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/registratienummer"
+                            app:layout_constraintStart_toStartOf="@+id/naamMedicijnCard2"
+                            app:layout_constraintTop_toBottomOf="@+id/naamMedicijnCard2" />
+
+                        <TextView
+                            android:id="@+id/registratienummer2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{medicijnListViewModel.registratienummer}"
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/lato"
+                            app:layout_constraintStart_toStartOf="@+id/registratienummerLabel2"
+                            app:layout_constraintTop_toBottomOf="@+id/registratienummerLabel2" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/medicijn3"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_shadow"
+                android:onClick="@{() -> medicijnListViewModel.btnNavigateToMedicijnDetailClicked()}"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/medicijn2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="154dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/pil"></androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/naamMedicijnCard3"
+                            style="@style/cardViewMedicijn"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@{medicijnListViewModel.naam}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/registratienummerLabel3"
+                            style="@style/labelVet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/registratienummer"
+                            app:layout_constraintStart_toStartOf="@+id/naamMedicijnCard3"
+                            app:layout_constraintTop_toBottomOf="@+id/naamMedicijnCard3" />
+
+                        <TextView
+                            android:id="@+id/registratienummer3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{medicijnListViewModel.registratienummer}"
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/lato"
+                            app:layout_constraintStart_toStartOf="@+id/registratienummerLabel3"
+                            app:layout_constraintTop_toBottomOf="@+id/registratienummerLabel3" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/medicijn4"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_shadow"
+                android:onClick="@{() -> medicijnListViewModel.btnNavigateToMedicijnDetailClicked()}"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/medicijn3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="154dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/pil"></androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/naamMedicijnCard4"
+                            style="@style/cardViewMedicijn"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@{medicijnListViewModel.naam}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/registratienummerLabel4"
+                            style="@style/labelVet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/registratienummer"
+                            app:layout_constraintStart_toStartOf="@+id/naamMedicijnCard4"
+                            app:layout_constraintTop_toBottomOf="@+id/naamMedicijnCard4" />
+
+                        <TextView
+                            android:id="@+id/registratienummer4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{medicijnListViewModel.registratienummer}"
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/lato"
+                            app:layout_constraintStart_toStartOf="@+id/registratienummerLabel4"
+                            app:layout_constraintTop_toBottomOf="@+id/registratienummerLabel4" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/medicijn5"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_shadow"
+                android:onClick="@{() -> medicijnListViewModel.btnNavigateToMedicijnDetailClicked()}"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/medicijn4">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="154dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/pil"></androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/naamMedicijnCard5"
+                            style="@style/cardViewMedicijn"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@{medicijnListViewModel.naam}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/registratienummerLabel5"
+                            style="@style/labelVet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/registratienummer"
+                            app:layout_constraintStart_toStartOf="@+id/naamMedicijnCard5"
+                            app:layout_constraintTop_toBottomOf="@+id/naamMedicijnCard5" />
+
+                        <TextView
+                            android:id="@+id/registratienummer5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{medicijnListViewModel.registratienummer}"
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/lato"
+                            app:layout_constraintStart_toStartOf="@+id/registratienummerLabel5"
+                            app:layout_constraintTop_toBottomOf="@+id/registratienummerLabel5" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <ImageView
+                android:id="@+id/btnZelfMedicijnToevoegen"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="-10dp"
+                android:elevation="100dp"
+                android:onClick="@{() -> medicijnListViewModel.btnCreateMedicijnClicked()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_marginBaseline="0dp"
+                app:srcCompat="@drawable/create_medicijn4" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

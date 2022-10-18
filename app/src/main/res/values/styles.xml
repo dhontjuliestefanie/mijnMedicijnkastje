@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //buttons
+
+    <style name="transparantButton">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">65dp</item>
+        <item name="android:backgroundTint">#00FFFFFF</item>
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:letterSpacing">0.15</item>
+    </style>
+
+    <style name="greenButton">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">#4c8690</item>
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+    </style>
+
+    <style name="pinkButton">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">#fdcbd1</item>
+        <item name="android:fontFamily">@font/lato_bold</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:textColor">#666666</item>
+    </style>
+
+    <style name="ficheNaamMedicijn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/lato</item>
+    </style>
+
+    <style name="titelHoofdletterExtraWit">
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="titelHoofdletterExtraWitVet">
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="titelHoofdletterExtraWitVetGroter">
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="gegevensMedicijnVet">
+        <item name="android:fontFamily">@font/lato_bold</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="cardViewMedicijn">
+        <item name="android:fontFamily">@font/lato_bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#4c8690</item>
+    </style>
+
+    <style name="labelVet">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/lato_bold</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="labelMager">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/lato</item>
+    </style>
+
+    <style name="doorlopendeTekst">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="doorlopendeTekstGroter">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="vetteRodeTekst">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#890000</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="groteTitelZwart">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="groteTitelGroen">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+</resources>

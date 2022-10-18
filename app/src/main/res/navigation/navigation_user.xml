@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_user"
+    app:startDestination="@id/medicijnkastFragment2">
+    <fragment
+        android:id="@+id/medicijnkastFragment2"
+        android:name="com.example.mijnmedicijnkastje.screens.medicijnkast.MedicijnkastFragment"
+        android:label="MedicijnkastFragment" />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.mijnmedicijnkastje.screens.user.UserFragment"
+        android:label="UserFragment" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.mijnmedicijnkastje.MainActivity"
+        android:label="MainActivity" />
+    <activity
+        android:id="@+id/userActivity"
+        android:name="com.example.mijnmedicijnkastje.UserActivity"
+        android:label="UserActivity" />
+</navigation>

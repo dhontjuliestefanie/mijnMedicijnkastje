@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_medicijn"
+    app:startDestination="@id/medicijnListFragment4">
+    <fragment
+        android:id="@+id/medicijnListFragment4"
+        android:name="com.example.mijnmedicijnkastje.screens.medicijnList.MedicijnListFragment"
+        android:label="MedicijnListFragment">
+        <action
+            android:id="@+id/action_medicijnListFragment4_to_medicijnFragment3"
+            app:destination="@id/medicijnFragment3" />
+        <action
+            android:id="@+id/action_medicijnListFragment4_to_userFragment"
+            app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_medicijnListFragment4_to_createMedicijnFragment"
+            app:destination="@id/createMedicijnFragment" />
+        <action
+            android:id="@+id/action_medicijnListFragment4_to_mainActivity"
+            app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_medicijnListFragment4_to_userActivity"
+            app:destination="@id/userActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicijnFragment3"
+        android:name="com.example.mijnmedicijnkastje.screens.medicijn.MedicijnFragment"
+        android:label="MedicijnFragment">
+        <action
+            android:id="@+id/action_medicijnFragment3_to_userActivity"
+            app:destination="@id/userActivity" />
+        <action
+            android:id="@+id/action_medicijnFragment3_to_userFragment"
+            app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_medicijnFragment3_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/userActivity"
+        android:name="com.example.mijnmedicijnkastje.UserActivity"
+        android:label="UserActivity" />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.mijnmedicijnkastje.screens.user.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_userFragment_to_userActivity"
+            app:destination="@id/userActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/createMedicijnFragment"
+        android:name="com.example.mijnmedicijnkastje.screens.createMedicijn.CreateMedicijnFragment"
+        android:label="createMedicijnFragment">
+        <action
+            android:id="@+id/action_createMedicijnFragment_to_userActivity"
+            app:destination="@id/userActivity" />
+        <action
+            android:id="@+id/action_createMedicijnFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_createMedicijnFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.mijnmedicijnkastje.MainActivity"
+        android:label="MainActivity" />
+</navigation>

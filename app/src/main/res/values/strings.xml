@@ -1,0 +1,45 @@
+<resources>
+
+
+    <string name="app_name">Mijn medicijnkastje</string>
+    <string name="registratienummer">Registratienummer: </string>
+    <string name="houdbaarheidsdatumHoofdl">HOUDBAARHEIDSDATUM</string>
+    <string name="houdbaarheidsdatum">Houdbaarheidsdatum: </string>
+    <string name="aantalDosissen">AANTAL</string>
+    <string name="extraInfoHoofdl">EXTRA INFO</string>
+    <string name="extraInfo">Extra info:</string>
+    <string name="zoekresultaten">ZOEKRESULTATEN</string>
+    <string name="zelfMedicijnCreeren">Zelf een medicijn creëren</string>
+    <string name="naamMedicijn">Naam medicijn:</string>
+    <string name="registratienrZelf">Registratienummer medicijn (indien gekend):</string>
+    <string name="hintExtraInfo">Geef hier extra info mee zoals bvb. gebruiksaanwijzing</string>
+    <string name="meerInfoEnBijsluiter">MEER INFO &amp; BIJSLUITER</string>
+    <string name="mijn_medicijnkastje">MIJN MEDICIJNKASTJE</string>
+    <string name="zoek_naar_medicijn">ZOEK NAAR MEDICIJN</string>
+    <string name="ga_naar_medicijn">GA NAAR MEDICIJN</string>
+    <string name="voegToe">VOEG TOE</string>
+    <string name="background_pills">background pills</string>
+    <string name="logo_mijn_medicijnkastje">logo mijn medicijnkastje</string>
+    <string name="LoremIpsum">Lorem ipsum</string>
+    <string name="houdbaarheidsdatum1610">Houdbaarheidsdatum: 16/10/2022</string>
+    <string name="aantalDosissenInMedicijnkastje">U hebt nog 5 dosissen in uw medicijnkastje</string>
+    <string name="edit_text_hint"><font size="17">Zoek op naam medicijn</font></string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="naamGebruiker">Naam</string>
+    <string name="voornaamGebruiker">Voornaam</string>
+    <string name="geboortedatumGebruiker">Geboortedatum</string>
+    <string name="dagelijkseMedicatieGebruiker">Lijst dagelijkse medicatie</string>
+    <string name="ga_naar_gebruiker">GA NAAR GEBRUIKER</string>
+    <string name="wijzig">WIJZIG</string>
+    <string name="klikOmTeVerwijderen">Druk op een medicijn om het te verwijderen</string>
+    <string name="voegMedToe">VOEG MEDICIJN TOE</string>
+
+
+
+
+
+
+
+
+
+</resources>

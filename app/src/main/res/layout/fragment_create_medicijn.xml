@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="createMedicijnViewModel"
+            type="com.example.mijnmedicijnkastje.screens.createMedicijn.CreateMedicijnViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/zelfMedAanmaken"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_shadow"
+            android:orientation="vertical"
+            android:padding="25dp">
+
+            <TextView
+                android:id="@+id/titelZelfMedAanmaken"
+                style="@style/groteTitelGroen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zelfMedicijnCreeren"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lblNaamMedicijnZelf"
+                style="@style/titelHoofdletterExtraWitVet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/naamMedicijn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titelZelfMedAanmaken" />
+
+            <EditText
+                android:id="@+id/naamMedicijnZelf"
+                style="@style/doorlopendeTekstGroter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border"
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:textColorHint="@color/grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblNaamMedicijnZelf" />
+
+            <TextView
+                android:id="@+id/lblRegistratienrZelf"
+                style="@style/titelHoofdletterExtraWitVet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/registratienrZelf"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/naamMedicijnZelf" />
+
+            <EditText
+                android:id="@+id/invulveldRegistratienummer"
+                style="@style/doorlopendeTekstGroter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border"
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:textColorHint="@color/grey"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblRegistratienrZelf" />
+
+            <TextView
+                android:id="@+id/lblHoudbaarheidsdatumZelf"
+                style="@style/titelHoofdletterExtraWitVet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/houdbaarheidsdatum"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/invulveldRegistratienummer" />
+
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/lightgreen"
+                android:theme="@style/Theme.AppCompat.Light"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblHoudbaarheidsdatumZelf" />
+
+            <TextView
+                android:id="@+id/lblAantalZelf"
+                style="@style/titelHoofdletterExtraWitVet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Aantal:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+            <EditText
+                android:id="@+id/invulveldAantal"
+                style="@style/doorlopendeTekstGroter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColorHint="@color/grey"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblAantalZelf" />
+
+            <TextView
+                android:id="@+id/lblExtraInfoZelf"
+                style="@style/titelHoofdletterExtraWitVet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/extraInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/invulveldAantal" />
+
+            <EditText
+                android:id="@+id/invulveldExtraInfo"
+                style="@style/doorlopendeTekstGroter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border"
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:textColorHint="@color/grey"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblExtraInfoZelf" />
+
+            <Button
+                android:id="@+id/btnVoegToeAanMedicijnkastje"
+                style="@style/pinkButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:onClick="@{() -> createMedicijnViewModel.btnNavigateToMedicijnKastClicked()}"
+                android:text="@string/voegToe"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/invulveldExtraInfo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
