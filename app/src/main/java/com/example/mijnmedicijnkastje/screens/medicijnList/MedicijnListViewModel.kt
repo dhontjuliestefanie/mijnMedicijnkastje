@@ -4,23 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mijnmedicijnkastje.models.Medicijn
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.mijnmedicijnkastje.models.MockupMedicijnDB
 
 class MedicijnListViewModel : ViewModel() {
-
-    val today = Calendar.getInstance().time
-    val formatter = SimpleDateFormat("dd/MM/yyyy")
-    val formattedDate = formatter.format(today)
-
-    private val medicijn2 = Medicijn(
-        "Nurofen voor Kinderen Sinaasappel 100 mg, kauwcapsules, zacht",
-        "RVG 112524",
-        "www.nurofen.be",
-        formattedDate,
-        20,
-        null
-    )
 
     private var _medicijn = MutableLiveData<Medicijn>()
     val medicijn: LiveData<Medicijn>
@@ -28,38 +14,8 @@ class MedicijnListViewModel : ViewModel() {
             return _medicijn
         }
 
-    private val _naam = MutableLiveData<String>()
-    val naam: LiveData<String>
-        get() = _naam
-
-    private val _registratienummer = MutableLiveData<String>()
-    val registratienummer: LiveData<String>
-        get() = _registratienummer
-
-    private val _linkInfo = MutableLiveData<String>()
-    val linkInfo: LiveData<String>
-        get() = _linkInfo
-
-    private var _houdbaarheidsdatum = MutableLiveData<String>()
-    val houdbaarheidsdatum: LiveData<String>
-        get() = _houdbaarheidsdatum
-
-    private var _aantal = MutableLiveData<Int>()
-    val aantal: LiveData<Int>
-        get() = _aantal
-
-    private var _extraInfo = MutableLiveData<String?>()
-    val extraInfo: LiveData<String?>
-        get() = _extraInfo
-
     init {
-        _naam.value = this.medicijn2.naam
-        _registratienummer.value = this.medicijn2.registratienr
-        _linkInfo.value = this.medicijn2.linkInfo
-        _houdbaarheidsdatum.value = this.medicijn2.houdbaarheidsdatum
-        _aantal.value = this.medicijn2.aantal
-        _extraInfo.value = this.medicijn2.extraInfo
-        _medicijn.value = this.medicijn2
+        _medicijn.value = MockupMedicijnDB().getMedicijn()
     }
 
     private val _navigateToMedicijnDetail = MutableLiveData<Boolean>()

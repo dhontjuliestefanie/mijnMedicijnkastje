@@ -52,8 +52,8 @@ class CreateMedicijnFragment : Fragment() {
     private fun voegToeAanMedicijnkast() {
         findNavController()
             .navigate(CreateMedicijnFragmentDirections.actionCreateMedicijnFragmentToUserActivity())
-        viewModel.navigateToMedicijnKastFinished()
         Toast.makeText(activity, "Medicijn is toegevoegd", Toast.LENGTH_SHORT).show()
+        viewModel.navigateToMedicijnKastFinished()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

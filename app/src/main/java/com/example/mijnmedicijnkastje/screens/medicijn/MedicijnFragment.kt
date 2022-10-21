@@ -30,12 +30,13 @@ class MedicijnFragment : Fragment() {
             container,
             false
         )
-//        val medicijn = MedicijnFragmentArgs.fromBundle(requireArguments()).medicijn
-        val fact = MedicijnModelFactory()
+        val medicijn = MedicijnFragmentArgs.fromBundle(requireArguments()).medicijn
+        val fact = MedicijnModelFactory(medicijn)
 
         viewModel = ViewModelProvider(this, fact).get(MedicijnViewModel::class.java)
         binding.medicijnViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
 
         viewModel.navigateToMedicijnkast.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (it) {

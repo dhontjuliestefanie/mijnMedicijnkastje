@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.mijnmedicijnkastje.R
 import com.example.mijnmedicijnkastje.databinding.FragmentMedicijnListBinding
+import com.example.mijnmedicijnkastje.models.Medicijn
 
 class MedicijnListFragment : Fragment() {
 
@@ -53,9 +54,9 @@ class MedicijnListFragment : Fragment() {
     }
 
     private fun navigateMedicijnDetail() {
-        val medicijn = viewModel.medicijn
+        val medicijn : Medicijn = viewModel.medicijn.value!!
         findNavController()
-            .navigate(MedicijnListFragmentDirections.actionMedicijnListFragment4ToMedicijnFragment3())
+            .navigate(MedicijnListFragmentDirections.actionMedicijnListFragment4ToMedicijnFragment3(medicijn))
         viewModel.navigateToMedicijnDetailFinished()
     }
 
