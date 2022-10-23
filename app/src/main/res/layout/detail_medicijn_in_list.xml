@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="medicijn"
+            type="com.example.mijnmedicijnkastje.models.Medicijn" />
+
+        <variable
+            name="clickListener"
+            type="com.example.mijnmedicijnkastje.screens.medicijnList.MedicijnClickListener" />
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/medicijn1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/border_shadow"
+        android:onClick="@{() -> clickListener.onClick(medicijn)}"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginTop="16dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="154dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/pil" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/naamMedicijnCard"
+                    style="@style/cardViewMedicijn"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@{medicijn.naam}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/registratienummerLabel"
+                    style="@style/labelVet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/registratienummer"
+                    app:layout_constraintStart_toStartOf="@+id/naamMedicijnCard"
+                    app:layout_constraintTop_toBottomOf="@+id/naamMedicijnCard" />
+
+                <TextView
+                    android:id="@+id/registratienummer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{medicijn.registratienr}"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/lato"
+                    app:layout_constraintStart_toStartOf="@+id/registratienummerLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/registratienummerLabel" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!--        <androidx.cardview.widget.CardView-->
+    <!--            android:id="@+id/medicijn1"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="150dp"-->
+    <!--            android:layout_marginTop="16dp"-->
+    <!--            android:background="@drawable/border_shadow"-->
+    <!--            android:onClick="@{() -> clickListener.onClick(medicijn)}"-->
+    <!--            app:cardBackgroundColor="@color/white"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/zoekresultatenLbl">-->
+
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:orientation="horizontal">-->
+
+    <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                    android:layout_width="154dp"-->
+    <!--                    android:layout_height="match_parent"-->
+    <!--                    android:background="@drawable/pil"></androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content">-->
+
+    <!--                    <TextView-->
+    <!--                        android:id="@+id/naamMedicijnCard"-->
+    <!--                        style="@style/cardViewMedicijn"-->
+    <!--                        android:layout_width="150dp"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginStart="16dp"-->
+    <!--                        android:layout_marginTop="8dp"-->
+    <!--                        android:text="@{medicijn.naam}"-->
+    <!--                        app:layout_constraintStart_toStartOf="parent"-->
+    <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--                    <TextView-->
+    <!--                        android:id="@+id/registratienummerLabel"-->
+    <!--                        style="@style/labelVet"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginTop="8dp"-->
+    <!--                        android:text="@string/registratienummer"-->
+    <!--                        app:layout_constraintStart_toStartOf="@+id/naamMedicijnCard"-->
+    <!--                        app:layout_constraintTop_toBottomOf="@+id/naamMedicijnCard" />-->
+
+    <!--                    <TextView-->
+    <!--                        android:id="@+id/registratienummer"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="@{medicijn.registratienr}"-->
+    <!--                        android:textColor="#000000"-->
+    <!--                        android:textSize="12sp"-->
+    <!--                        app:fontFamily="@font/lato"-->
+    <!--                        app:layout_constraintStart_toStartOf="@+id/registratienummerLabel"-->
+    <!--                        app:layout_constraintTop_toBottomOf="@+id/registratienummerLabel" />-->
+
+
+    <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--            </LinearLayout>-->
+    <!--        </androidx.cardview.widget.CardView>-->
+    <!--    </LinearLayout>-->
+</layout>
