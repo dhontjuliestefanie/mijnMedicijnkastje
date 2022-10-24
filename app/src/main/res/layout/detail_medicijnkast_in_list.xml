@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="medicijn"
+            type="com.example.mijnmedicijnkastje.models.Medicijn" />
+
+        <variable
+            name="clickListener"
+            type="com.example.mijnmedicijnkastje.screens.medicijnkast.MedicijnClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/medicijn1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border_shadow"
+        android:onClick="@{() -> clickListener.onClick(medicijn)}"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@color/lightgreen">
+
+                <TextView
+                    android:id="@+id/naamMedicijnCard"
+                    style="@style/cardViewMedicijn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@{medicijn.naam}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/registratienummerLabel"
+                    style="@style/labelVet"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/registratienummer"
+                    app:fontFamily="@font/lato"
+                    app:layout_constraintStart_toStartOf="@+id/naamMedicijnCard"
+                    app:layout_constraintTop_toBottomOf="@+id/naamMedicijnCard" />
+
+                <TextView
+                    android:id="@+id/registratienummer"
+                    style="@style/labelMager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{medicijn.registratienr}"
+                    app:layout_constraintStart_toStartOf="@+id/registratienummerLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/registratienummerLabel" />
+
+                <TextView
+                    android:id="@+id/vervaldatumLabel"
+                    style="@style/labelVet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/houdbaarheidsdatum"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/lato"
+                    app:layout_constraintStart_toStartOf="@+id/registratienummer"
+                    app:layout_constraintTop_toBottomOf="@+id/registratienummer" />
+
+                <TextView
+                    android:id="@+id/vervaldatum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{medicijn.houdbaarheidsdatum}"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/lato"
+                    app:layout_constraintStart_toStartOf="@+id/vervaldatumLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/vervaldatumLabel" />
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    style="@style/vetteGroeneTekst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:buttonTint="@color/green"
+                    android:text="Dagelijkse medicatie"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/vervaldatum"
+                    app:layout_constraintTop_toBottomOf="@+id/vervaldatum" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/lblRegistratienrZelf"
+                                    style="@style/titelHoofdletterExtraWit"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginTop="16dp"
+                                    android:text="@string/aantalDosissen"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+<!--                                <Button-->
+<!--                                    android:id="@+id/btnIncreaseDosis"-->
+<!--                                    android:layout_width="20dp"-->
+<!--                                    android:layout_height="20dp"-->
+<!--                                    android:layout_marginStart="16dp"-->
+<!--                                    android:background="@drawable/plusknop"-->
+<!--                                    android:onClick="@{() -> medicijn.increaseDosis()}"-->
+<!--                                    app:layout_constraintBaseline_toBaselineOf="@+id/btnDecreaseDosis"-->
+<!--                                    app:layout_constraintStart_toEndOf="@+id/kiesAantalDosissen"-->
+<!--                                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />-->
+
+<!--                                <TextView-->
+<!--                                    android:id="@+id/kiesAantalDosissen"-->
+<!--                                    style="@style/gegevensMedicijnVet"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginStart="16dp"-->
+<!--                                    android:text="@{medicijn.aantal}"-->
+<!--                                    app:layout_constraintBaseline_toBaselineOf="@+id/btnDecreaseDosis"-->
+<!--                                    app:layout_constraintStart_toEndOf="@+id/btnDecreaseDosis"-->
+<!--                                    tools:ignore="MissingConstraints" />-->
+
+<!--                                <Button-->
+<!--                                    android:id="@+id/btnDecreaseDosis"-->
+<!--                                    android:layout_width="20dp"-->
+<!--                                    android:layout_height="20dp"-->
+<!--                                    android:layout_marginTop="8dp"-->
+<!--                                    android:background="@drawable/minknop"-->
+<!--                                    android:onClick="@{() -> medicijnkastViewModel.decreaseDosis()}"-->
+<!--                                    app:layout_constraintStart_toStartOf="@+id/lblRegistratienrZelf"-->
+<!--                                    app:layout_constraintTop_toBottomOf="@+id/lblRegistratienrZelf"-->
+<!--                                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />-->
+
+                                <ImageView
+                                    android:id="@+id/btnVerwijderMedicijn"
+                                    android:layout_width="36dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:layout_marginBottom="16dp"
+
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:srcCompat="@drawable/vuilbak_icon" />
+
+<!--                                <Button-->
+<!--                                    android:id="@+id/meerInfoMedicijn"-->
+<!--                                    style="@style/pinkButton"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginStart="13dp"-->
+<!--                                    android:layout_marginTop="16dp"-->
+<!--                                    android:onClick="@{() -> medicijn.btnMeerInfoClicked()}"-->
+<!--                                    android:text="Meer info"-->
+<!--                                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                                    app:layout_constraintTop_toBottomOf="@+id/kiesAantalDosissen" />-->
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

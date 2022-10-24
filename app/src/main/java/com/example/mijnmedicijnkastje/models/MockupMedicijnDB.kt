@@ -46,12 +46,18 @@ class MockupMedicijnDB {
         20,
         null
     )
-    private val medicijnen: Array<Medicijn> = arrayOf(med1, med2, med3)
+    private var medicijnen: Array<Medicijn> = arrayOf(med1, med2, med3)
 
     fun getMedicijnen(): LiveData<List<Medicijn>> {
         var medList = MutableLiveData<List<Medicijn>>()
         medList.value = medicijnen.toList()
         return medList
+    }
+
+    fun removeMedicijn(medicijn: Medicijn) {
+        val result = medicijnen.toMutableList()
+        result.remove(medicijn)
+        medicijnen = result.toTypedArray()
     }
 }
 

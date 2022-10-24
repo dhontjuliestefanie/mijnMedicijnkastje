@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.mijnmedicijnkastje.R
+import com.example.mijnmedicijnkastje.database.MedicijnInKastDatabase
 import com.example.mijnmedicijnkastje.databinding.FragmentMedicijnBinding
 
 class MedicijnFragment : Fragment() {
@@ -30,13 +31,15 @@ class MedicijnFragment : Fragment() {
             container,
             false
         )
+        val application = requireNotNull(this.activity).application
+        val dataSource = MedicijnInKastDatabase.getInstance(application).medicijnDatabaseDAO
+
         val medicijn = MedicijnFragmentArgs.fromBundle(requireArguments()).medicijn
-        val fact = MedicijnModelFactory(medicijn)
+        val fact = MedicijnModelFactory(medicijn, dataSource, application)
 
         viewModel = ViewModelProvider(this, fact).get(MedicijnViewModel::class.java)
         binding.medicijnViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
 
         viewModel.navigateToMedicijnkast.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (it) {

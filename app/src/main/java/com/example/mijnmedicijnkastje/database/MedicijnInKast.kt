@@ -7,24 +7,23 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "medicijnen_in_kast_table")
 data class MedicijnInKast(
     @PrimaryKey(autoGenerate = true)
-    var medId: Int,
+    var medId: Int = 0,
 
     @ColumnInfo(name = "naam")
-    var naam: String,
+    var naam: String? = null,
 
     @ColumnInfo(name = "registratienummer")
-    var registratienr: String,
+    var registratienr: String? = null,
 
     @ColumnInfo(name = "link_info")
-    var linkInfo: String,
+    var linkInfo: String? = null,
 
     @ColumnInfo(name = "houdbaarheidsdatum")
-    var houdbaarheidsdatum: String,
+    var houdbaarheidsdatum: String? = null,
 
     @ColumnInfo(name = "aantal")
-    var aantal: Int,
+    var aantal: Int = 20,
 
     @ColumnInfo(name = "extraInfo")
-    var extraInfo: String?
-) {
-}
+    var extraInfo: String? = null
+)

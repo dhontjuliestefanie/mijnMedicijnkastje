@@ -6,16 +6,19 @@ import androidx.room.*
 @Dao
 interface MedicijnDatabaseDAO {
     @Insert
-    fun insert(medicijn: MedicijnInKast)
+    suspend fun insert(medicijn: MedicijnInKast)
 
     @Update
-    fun update(medicijn: MedicijnInKast)
+    suspend fun update(medicijn: MedicijnInKast)
 
     @Delete
-    fun delete(medicijn: MedicijnInKast)
+    suspend fun delete(medicijn: MedicijnInKast)
 
     @Query("SELECT * from medicijnen_in_kast_table WHERE medId =:key")
-    fun get(key: Int): MedicijnInKast?
+    suspend fun get(key: Int): MedicijnInKast?
+
+    @Query("SELECT * FROM medicijnen_in_kast_table ORDER BY medId DESC LIMIT 1")
+    fun getMed(): MedicijnInKast?
 
     @Query("SELECT * from medicijnen_in_kast_table ORDER BY naam DESC")
     fun getAllMedicijnen(): LiveData<List<MedicijnInKast>>
