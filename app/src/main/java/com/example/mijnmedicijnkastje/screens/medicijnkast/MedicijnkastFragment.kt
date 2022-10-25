@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mijnmedicijnkastje.R
+import com.example.mijnmedicijnkastje.database.MedicijnInKastDatabase
 import com.example.mijnmedicijnkastje.databinding.FragmentMedicijnkastBinding
 
 class MedicijnkastFragment : Fragment() {
@@ -31,12 +32,14 @@ class MedicijnkastFragment : Fragment() {
             container,
             false
         )
-
-        val adapter = ListMedicijnkastAdapter(MedicijnClickListener {
+        val adapter = ListMedicijnkastAdapter(MedicijnInKastClickListener {
             viewModel.clickMedicijn(it)
+            viewModel.removeMedicijn(it)
         })
 
-        val fact = MedicijnkastModelFactory()
+        val application = requireNotNull(this.activity).application
+        val dataSource = MedicijnInKastDatabase.getInstance(application).medicijnDatabaseDAO
+        val fact = MedicijnkastModelFactory(dataSource, application)
 
         viewModel = ViewModelProvider(this, fact).get(MedicijnkastViewModel::class.java)
         binding.medicijnkastViewModel = viewModel
@@ -77,8 +80,7 @@ class MedicijnkastFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.
-        onNavDestinationSelected(item,requireView().findNavController())
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
     }
 }

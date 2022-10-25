@@ -7,11 +7,11 @@
 
         <variable
             name="medicijn"
-            type="com.example.mijnmedicijnkastje.models.Medicijn" />
+            type="com.example.mijnmedicijnkastje.database.MedicijnInKast" />
 
         <variable
             name="clickListener"
-            type="com.example.mijnmedicijnkastje.screens.medicijnkast.MedicijnClickListener" />
+            type="com.example.mijnmedicijnkastje.screens.medicijnkast.MedicijnInKastClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView

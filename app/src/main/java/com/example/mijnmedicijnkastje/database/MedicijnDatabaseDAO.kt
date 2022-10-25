@@ -22,4 +22,7 @@ interface MedicijnDatabaseDAO {
 
     @Query("SELECT * from medicijnen_in_kast_table ORDER BY naam DESC")
     fun getAllMedicijnen(): LiveData<List<MedicijnInKast>>
+
+    @Query("SELECT * from medicijnen_in_kast_table WHERE naam = :naam")
+    suspend fun get(naam: String): MedicijnInKast?
 }

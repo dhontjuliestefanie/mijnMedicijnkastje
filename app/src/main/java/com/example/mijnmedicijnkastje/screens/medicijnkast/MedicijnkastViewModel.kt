@@ -1,12 +1,17 @@
 package com.example.mijnmedicijnkastje.screens.medicijnkast
 
+import android.app.Application
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.mijnmedicijnkastje.models.Medicijn
-import com.example.mijnmedicijnkastje.models.MockupMedicijnDB
+import com.example.mijnmedicijnkastje.database.MedicijnDatabaseDAO
+import com.example.mijnmedicijnkastje.database.MedicijnInKast
+import com.example.mijnmedicijnkastje.models.MockupMedicijnkastDB
 
-class MedicijnkastViewModel : ViewModel() {
+class MedicijnkastViewModel(val database: MedicijnDatabaseDAO, application: Application) :
+    AndroidViewModel(application) {
+
 //    fun increaseDosis() {
 //        _aantal.value = _aantal.value?.plus(1)
 //    }
@@ -47,14 +52,15 @@ class MedicijnkastViewModel : ViewModel() {
         _meerInfoMedicijn.value = true
     }
 
-    private val _medicijnkast = MockupMedicijnDB().getMedicijnen()
-    val medicijnkast: LiveData<List<Medicijn>>
+    private var _medicijnkast = MockupMedicijnkastDB().getMedicijnen()
+
+    val medicijnkast: LiveData<List<MedicijnInKast>>
         get() {
             return _medicijnkast
         }
 
-    private var _medicijn = MutableLiveData<Medicijn?>()
-    val medicijn: MutableLiveData<Medicijn?>
+    private var _medicijn = MutableLiveData<MedicijnInKast?>()
+    val medicijn: MutableLiveData<MedicijnInKast?>
         get() {
             return _medicijn
         }
@@ -63,8 +69,20 @@ class MedicijnkastViewModel : ViewModel() {
         _medicijn.value = null
     }
 
-    fun clickMedicijn(medicijn : Medicijn) {
+    fun clickMedicijn(medicijn: MedicijnInKast) {
         _medicijn.value = medicijn
     }
 
+    fun removeMedicijn(medicijn: MedicijnInKast) {
+//        viewModelScope.launch {
+//            database.delete(medicijn)
+//        }
+        var lst = _medicijnkast.value?.toMutableList()
+        if (lst != null) {
+            lst.remove(medicijn)
+        }
+        _medicijnkast = MutableLiveData(lst)
+        Log.i("MedicijnkastVM", "Verwijderen gelukt")
+
+    }
 }
