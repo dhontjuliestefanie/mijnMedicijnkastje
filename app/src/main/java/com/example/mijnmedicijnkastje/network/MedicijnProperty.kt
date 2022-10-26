@@ -13,16 +13,16 @@ package com.example.mijnmedicijnkastje.network
 data class MedicijnProperty(
     val help: String,
     val succes: Boolean,
-    val result: Map<String, Any>,
-    val records_format: String,
-    val records: List<MedicijnInApi>,
-    val _links: Map<String, String>,
-    val total: Int
+    val result: Map<String, Any>
+//    val records_format: String,
+//    val records: List<MedicijnInApi>,
+//    val _links: Map<String, String>,
+//    val total: Int
 ) {
-    @JvmName("getRecords1")
-    fun getRecords(): List<MedicijnInApi> {
-        return records
+    fun getRecords(): Any? {
+        return result["records"]
     }
+
 }
 
 data class MedicijnInApi(

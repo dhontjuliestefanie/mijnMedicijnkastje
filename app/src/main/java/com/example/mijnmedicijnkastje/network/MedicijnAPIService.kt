@@ -24,7 +24,6 @@ private val retrofit = Retrofit.Builder()
 
 
 interface MedicijnAPIService {
-
     @GET("nl/api/3/action/datastore_search?resource_id=1efaa651-add9-40f5-8b0c-2c2f2d352e11")
     fun getProperties(): Call<String>
 }
