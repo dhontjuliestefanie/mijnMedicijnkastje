@@ -1,5 +1,6 @@
 package com.example.mijnmedicijnkastje.screens.medicijnkast
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -13,6 +14,9 @@ class ListMedicijnkastAdapter(val clickListener: MedicijnInKastClickListener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position)!!, clickListener)
+        holder.binding.btnVerwijderMedicijn.setOnClickListener {
+            Log.i("ListmedicijnkastAdapter", "Pff")
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,4 +58,5 @@ class MedicijnDiffCallback : DiffUtil.ItemCallback<MedicijnInKast>() {
 
 class MedicijnInKastClickListener(val clickListener: (medicijn: MedicijnInKast) -> Unit) {
     fun onClick(medicijn: MedicijnInKast) = clickListener(medicijn)
+    fun remove(medicijn: MedicijnInKast) = clickListener(medicijn)
 }
