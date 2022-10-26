@@ -3,12 +3,11 @@ package com.example.mijnmedicijnkastje.screens.medicijnList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.mijnmedicijnkastje.models.Medicijn
 import com.example.mijnmedicijnkastje.models.MockupMedicijnDB
 import com.example.mijnmedicijnkastje.network.MedicijnAPI
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 
 class MedicijnListViewModel : ViewModel() {
 
@@ -51,27 +50,27 @@ class MedicijnListViewModel : ViewModel() {
     }
 
     private fun getMeds() {
-//        viewModelScope.launch {
-//            try {
-//                val listResult = MedicijnAPI.retrofitService.getProperties()
-//                _response.value = "Success: ${listResult} properties retrieved"
-//            } catch (e: Exception) {
-//                _response.value = "Failure: ${e.message}"
-//            }
-//
-//        }
-//    }
-        MedicijnAPI.retrofitService.getProperties().enqueue(
-            object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    _response.value = response.body()
-                }
+        viewModelScope.launch {
+            try {
+                val listResult = MedicijnAPI.retrofitService.getProperties()
+                _response.value = "Success: ${listResult} properties retrieved"
+            } catch (e: Exception) {
+                _response.value = "Failure: ${e.message}"
+            }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    _response.value = "Failure: " + t.message
-                }
-            })
+        }
     }
+//        MedicijnAPI.retrofitService.getProperties().enqueue(
+//            object : Callback<List<MedicijnProperty>> {
+//                 override fun onResponse(call: Call<List<MedicijnProperty>>, response: Response<List<MedicijnProperty>>) {
+//                    _response.value = "Success: ${response.body()?.size} properties received"
+//                }
+//
+//                override fun onFailure(call: Call<List<MedicijnProperty>>, t: Throwable) {
+//                    _response.value = "Failure: " + t.message
+//                }
+//            })
+//    }
 
 
 // navigatie
