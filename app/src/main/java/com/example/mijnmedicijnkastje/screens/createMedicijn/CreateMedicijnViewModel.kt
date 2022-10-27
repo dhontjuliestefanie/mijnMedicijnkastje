@@ -53,9 +53,9 @@ class CreateMedicijnViewModel(val database: MedicijnDatabaseDAO, application: Ap
 
 
     fun btnNavigateToMedicijnKastClicked() {
+        _voegToeAanMedicijnkast.value = true
         maakNieuwMedicijnAan()
         _medicijnVoorKast.value?.let { insert() }
-        _voegToeAanMedicijnkast.value = true
     }
 
     fun maakNieuwMedicijnAan() {
