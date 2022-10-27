@@ -1,6 +1,5 @@
 package com.example.mijnmedicijnkastje.screens.medicijnkast
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
@@ -21,37 +20,56 @@ class ListMedicijnkastAdapter(
         get() {
             return _deleteButtonTouched
         }
-
     private var _meerInfoButtonTouched = MutableLiveData<Boolean>()
     val meerInfoButtonTouched: MutableLiveData<Boolean>
         get() {
             return _meerInfoButtonTouched
         }
-
-    init {
-        _deleteButtonTouched.value = false
-        _meerInfoButtonTouched.value = false
-    }
-
     private var _medicijn = MutableLiveData<MedicijnInKast?>()
     val medicijn: MutableLiveData<MedicijnInKast?>
         get() {
             return _medicijn
         }
+    private var _increaseAantalTouched = MutableLiveData<Boolean>()
+    val increaseAantalTouched: MutableLiveData<Boolean>
+        get() {
+            return _increaseAantalTouched
+        }
+    private var _decreaseAantalTouched = MutableLiveData<Boolean>()
+    val decreaseAantalTouched: MutableLiveData<Boolean>
+        get() {
+            return _decreaseAantalTouched
+        }
 
     init {
+        _deleteButtonTouched.value = false
+        _meerInfoButtonTouched.value = false
         _medicijn.value = null
+        _increaseAantalTouched.value = false
+        _decreaseAantalTouched.value = false
     }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position)!!, clickListener)
         holder.binding.btnVerwijderMedicijn.setOnClickListener {
-            Log.i("lstmedadap", holder.binding.medicijn?.naam.toString())
             _medicijn.value = holder.binding.medicijn!!
             _deleteButtonTouched.value = true
         }
         holder.binding.meerInfoMedicijn.setOnClickListener {
             _meerInfoButtonTouched.value = true
+        }
+        holder.binding.btnIncreaseDosis.setOnClickListener {
+            _medicijn.value = holder.binding.medicijn!!
+            _medicijn.value!!.aantal = _medicijn.value!!.aantal.plus(1)
+            holder.binding.kiesAantalDosissen.setText(_medicijn.value!!.aantal.toString())
+            _increaseAantalTouched.value = true
+        }
+        holder.binding.btnDecreaseDosis.setOnClickListener {
+            _medicijn.value = holder.binding.medicijn!!
+            _medicijn.value!!.aantal = _medicijn.value!!.aantal.plus(-1)
+            holder.binding.kiesAantalDosissen.setText(_medicijn.value!!.aantal.toString())
+            _decreaseAantalTouched.value = true
         }
     }
 
@@ -68,6 +86,7 @@ class ListMedicijnkastAdapter(
         ) {
             binding.medicijn = medicijn
             binding.clickListener = clickListener
+            binding.kiesAantalDosissen.setText(medicijn.aantal.toString())
             binding.executePendingBindings()
         }
 

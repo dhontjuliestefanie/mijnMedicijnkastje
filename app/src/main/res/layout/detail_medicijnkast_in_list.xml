@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/border_shadow"
-        android:onClick="@{() -> clickListener.onClick(medicijn)}"
         app:cardBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,47 +123,47 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!--                                <Button-->
-                <!--                                    android:id="@+id/btnIncreaseDosis"-->
-                <!--                                    android:layout_width="20dp"-->
-                <!--                                    android:layout_height="20dp"-->
-                <!--                                    android:layout_marginStart="16dp"-->
-                <!--                                    android:background="@drawable/plusknop"-->
-                <!--                                    android:onClick="@{() -> medicijn.increaseDosis()}"-->
-                <!--                                    app:layout_constraintBaseline_toBaselineOf="@+id/btnDecreaseDosis"-->
-                <!--                                    app:layout_constraintStart_toEndOf="@+id/kiesAantalDosissen"-->
-                <!--                                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />-->
+                <Button
+                    android:id="@+id/btnIncreaseDosis"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/plusknop"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/btnDecreaseDosis"
+                    app:layout_constraintStart_toEndOf="@+id/kiesAantalDosissen"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-                <!--                                <TextView-->
-                <!--                                    android:id="@+id/kiesAantalDosissen"-->
-                <!--                                    style="@style/gegevensMedicijnVet"-->
-                <!--                                    android:layout_width="wrap_content"-->
-                <!--                                    android:layout_height="wrap_content"-->
-                <!--                                    android:layout_marginStart="16dp"-->
-                <!--                                    android:text="@{medicijn.aantal}"-->
-                <!--                                    app:layout_constraintBaseline_toBaselineOf="@+id/btnDecreaseDosis"-->
-                <!--                                    app:layout_constraintStart_toEndOf="@+id/btnDecreaseDosis"-->
-                <!--                                    tools:ignore="MissingConstraints" />-->
+                <TextView
+                    android:id="@+id/kiesAantalDosissen"
+                    style="@style/gegevensMedicijnVet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@{}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/btnDecreaseDosis"
+                    app:layout_constraintStart_toEndOf="@+id/btnDecreaseDosis"
+                    tools:ignore="MissingConstraints" />
 
-                <!--                                <Button-->
-                <!--                                    android:id="@+id/btnDecreaseDosis"-->
-                <!--                                    android:layout_width="20dp"-->
-                <!--                                    android:layout_height="20dp"-->
-                <!--                                    android:layout_marginTop="8dp"-->
-                <!--                                    android:background="@drawable/minknop"-->
-                <!--                                    android:onClick="@{() -> medicijnkastViewModel.decreaseDosis()}"-->
-                <!--                                    app:layout_constraintStart_toStartOf="@+id/lblRegistratienrZelf"-->
-                <!--                                    app:layout_constraintTop_toBottomOf="@+id/lblRegistratienrZelf"-->
-                <!--                                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />-->
+                <Button
+                    android:id="@+id/btnDecreaseDosis"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/minknop"
+                    app:layout_constraintStart_toStartOf="@+id/lblRegistratienrZelf"
+                    app:layout_constraintTop_toBottomOf="@+id/lblRegistratienrZelf"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 <ImageView
                     android:id="@+id/btnVerwijderMedicijn"
                     android:layout_width="36dp"
                     android:layout_height="35dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/meerInfoMedicijn"
                     app:srcCompat="@drawable/vuilbak_icon" />
 
                 <Button
@@ -174,7 +173,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="13dp"
                     android:layout_marginTop="16dp"
-                    android:onClick="@{() -> clickListener.onClick(medicijn)}"
                     android:text="Meer info"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/kiesAantalDosissen" />

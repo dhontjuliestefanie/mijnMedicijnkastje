@@ -68,6 +68,18 @@ class MedicijnkastFragment : Fragment() {
                 toonMeerInfoMedicijn()
             }
         })
+        adapter.increaseAantalTouched.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it) {
+                viewModel.medicijn.value = adapter.medicijn.value!!
+                updateMedicijn()
+            }
+        })
+        adapter.decreaseAantalTouched.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it) {
+                viewModel.medicijn.value = adapter.medicijn.value!!
+                updateMedicijn()
+            }
+        })
 
         return binding.root
     }
@@ -85,5 +97,9 @@ class MedicijnkastFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
+    }
+
+    private fun updateMedicijn() {
+        viewModel.update()
     }
 }
