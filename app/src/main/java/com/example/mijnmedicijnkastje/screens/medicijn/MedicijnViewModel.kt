@@ -1,18 +1,13 @@
 package com.example.mijnmedicijnkastje.screens.medicijn
 
 import android.app.Application
-import android.app.DatePickerDialog
-import android.content.Context
-import android.widget.Button
-import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mijnmedicijnkastje.database.MedicijnDatabaseDAO
 import com.example.mijnmedicijnkastje.models.Medicijn
-import java.util.*
 
-class MedicijnViewModel(__medicijn : Medicijn, val database: MedicijnDatabaseDAO, application: Application) : AndroidViewModel(application) {
+class MedicijnViewModel(__medicijn: Medicijn,  val database: MedicijnDatabaseDAO, application: Application) : AndroidViewModel(application) {
     private var _medicijn = MutableLiveData<Medicijn>()
     val medicijn: LiveData<Medicijn>
         get() {
@@ -32,8 +27,7 @@ class MedicijnViewModel(__medicijn : Medicijn, val database: MedicijnDatabaseDAO
     fun decreaseDosis() {
         if (aantal.value!! > 0) {
             aantal.value = aantal.value!!.plus(-1)
-        }
-        else {
+        } else {
             aantal.value = 0
         }
     }
@@ -75,28 +69,42 @@ class MedicijnViewModel(__medicijn : Medicijn, val database: MedicijnDatabaseDAO
         _navigateToMedicijnkast.value = false
     }
 
-    public fun showDatePickerDialog(mPickTimeBtn: Button, textView: TextView, context: Context) {
-
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-
-        mPickTimeBtn.setOnClickListener {
-            val dpd = DatePickerDialog(
-                context,
-                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    textView.setText("$dayOfMonth/${monthOfYear + 1}/$year")
-                },
-                year,
-                month,
-                day
-
-            )
-            dpd.show()
+    private var _timePickerDialogData: MutableLiveData<Boolean> = MutableLiveData()
+    val timePickerDialogData: LiveData<Boolean>
+        get() {
+            return _timePickerDialogData
         }
+
+    init {
+        _timePickerDialogData.value = false
     }
 
+    fun btnCalendarDialogClick() {
+        _timePickerDialogData.value = true
+    }
+
+    fun btnCalendarDialogClickFinished() {
+        _timePickerDialogData.value = false
+    }
+
+    private var _linkToWebsite: MutableLiveData<Boolean> = MutableLiveData()
+    val linkToWebsite: LiveData<Boolean>
+        get() {
+            return _linkToWebsite
+        }
+
+    init {
+        _linkToWebsite.value = false
+    }
+
+    fun btnMeerInfoEnBijsluiterClicked() {
+        _linkToWebsite.value = true
+    }
+
+    fun btnMeerInfoEnBijsluiterClickFinished() {
+        _linkToWebsite.value = false
+
+    }
 
 }
 

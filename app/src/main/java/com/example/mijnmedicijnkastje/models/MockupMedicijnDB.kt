@@ -1,4 +1,4 @@
-package com.example.mijnmedicijnkastje.models;
+package com.example.mijnmedicijnkastje.models
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +15,7 @@ class MockupMedicijnDB {
         return Medicijn(
             "Nurofen voor Kinderen Sinaasappel 100 mg, kauwcapsules, zacht",
             "RVG 112524",
-            "www.nurofen.be",
+            "http://www.nurofen.be",
             formattedDate,
             20,
             null
@@ -25,7 +25,7 @@ class MockupMedicijnDB {
     private val med1 = Medicijn(
         "Nurofen voor Kinderen Sinaasappel 100 mg, kauwcapsules, zacht",
         "RVG 112524",
-        "www.nurofen.be",
+        "http://www.nurofen.be",
         formattedDate,
         20,
         null
@@ -33,7 +33,7 @@ class MockupMedicijnDB {
     private val med2 = Medicijn(
         "Brufen 400 mg bruisgranulaat",
         "RVG 110571",
-        "www.brufen.be",
+        "http://www.brufen.be",
         formattedDate,
         20,
         null
@@ -41,7 +41,7 @@ class MockupMedicijnDB {
     private val med3 = Medicijn(
         "Vicks Vaporub, zalf voor inhalatiedamp",
         "RVG 120425//03088",
-        "www.vicks.be",
+        "http://www.vicks.be",
         formattedDate,
         20,
         null
@@ -49,7 +49,7 @@ class MockupMedicijnDB {
     private var medicijnen: Array<Medicijn> = arrayOf(med1, med2, med3)
 
     fun getMedicijnen(): LiveData<List<Medicijn>> {
-        var medList = MutableLiveData<List<Medicijn>>()
+        val medList = MutableLiveData<List<Medicijn>>()
         medList.value = medicijnen.toList()
         return medList
     }

@@ -69,7 +69,8 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/meerInfoEnBijsluiter"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/registratieNr" />
+                app:layout_constraintTop_toBottomOf="@+id/registratieNr"
+                android:onClick="@{() -> medicijnViewModel.btnMeerInfoEnBijsluiterClicked()}"/>
 
             <TextView
                 android:id="@+id/aantalInMedicijnkastje"
@@ -147,7 +148,9 @@
                     android:background="@drawable/calendar_icon"
                     app:layout_constraintStart_toEndOf="@+id/kiesHoudbaarheidsdatum"
                     app:layout_constraintTop_toTopOf="@+id/kiesHoudbaarheidsdatum"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+                    android:onClick="@{() -> medicijnViewModel.btnCalendarDialogClick()}"
+                    />
 
                 <TextView
                     android:id="@+id/kiesAantalDosissen"

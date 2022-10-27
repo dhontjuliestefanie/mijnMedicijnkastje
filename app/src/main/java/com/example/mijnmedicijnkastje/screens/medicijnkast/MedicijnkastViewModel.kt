@@ -1,13 +1,13 @@
 package com.example.mijnmedicijnkastje.screens.medicijnkast
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.mijnmedicijnkastje.database.MedicijnDatabaseDAO
 import com.example.mijnmedicijnkastje.database.MedicijnInKast
-import com.example.mijnmedicijnkastje.models.MockupMedicijnkastDB
+import kotlinx.coroutines.launch
 
 class MedicijnkastViewModel(val database: MedicijnDatabaseDAO, application: Application) :
     AndroidViewModel(application) {
@@ -24,35 +24,7 @@ class MedicijnkastViewModel(val database: MedicijnDatabaseDAO, application: Appl
 //        }
 //    }
 
-    private val _verwijderMedicijnUitKast = MutableLiveData<Boolean>()
-    val verwijderMedicijnUitKast: LiveData<Boolean>
-        get() {
-            return _verwijderMedicijnUitKast
-        }
-
-    init {
-        _verwijderMedicijnUitKast.value = false
-    }
-
-    fun btnVerwijderMedicijnClicked() {
-        _verwijderMedicijnUitKast.value = true
-    }
-
-    private val _meerInfoMedicijn = MutableLiveData<Boolean>()
-    val meerInfoMedicijn: LiveData<Boolean>
-        get() {
-            return _meerInfoMedicijn
-        }
-
-    init {
-        _meerInfoMedicijn.value = false
-    }
-
-    fun btnMeerInfoClicked() {
-        _meerInfoMedicijn.value = true
-    }
-
-    private var _medicijnkast = MockupMedicijnkastDB().getMedicijnen()
+    private var _medicijnkast = database.getAllMedicijnen()
 
     val medicijnkast: LiveData<List<MedicijnInKast>>
         get() {
@@ -65,24 +37,26 @@ class MedicijnkastViewModel(val database: MedicijnDatabaseDAO, application: Appl
             return _medicijn
         }
 
+    private var _id = MutableLiveData<Int?>()
+    val id: MutableLiveData<Int?>
+        get() {
+            return _id
+        }
+
     init {
         _medicijn.value = null
+        _id.value = 0
     }
 
     fun clickMedicijn(medicijn: MedicijnInKast) {
         _medicijn.value = medicijn
     }
 
-    fun removeMedicijn(medicijn: MedicijnInKast) {
-//        viewModelScope.launch {
-//            database.delete(medicijn)
-//        }
-        var lst = _medicijnkast.value?.toMutableList()
-        if (lst != null) {
-            lst.remove(medicijn)
+    fun delete() {
+        viewModelScope.launch {
+            _medicijn.value?.let { database.delete(it) }
         }
-        _medicijnkast = MutableLiveData(lst)
-        Log.i("MedicijnkastVM", "Verwijderen gelukt")
+
 
     }
 }

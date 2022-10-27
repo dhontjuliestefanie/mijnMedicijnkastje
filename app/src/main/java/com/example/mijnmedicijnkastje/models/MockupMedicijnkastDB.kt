@@ -20,7 +20,8 @@ class MockupMedicijnkastDB {
         "www.nurofen.be",
         formattedDate,
         20,
-        null
+        null,
+        false
     )
     private val med2 = MedicijnInKast(
         2,
@@ -29,7 +30,9 @@ class MockupMedicijnkastDB {
         "www.brufen.be",
         formattedDate,
         20,
-        null
+        null,
+    false
+
     )
     private val med3 = MedicijnInKast(
         3,
@@ -38,7 +41,8 @@ class MockupMedicijnkastDB {
         "www.vicks.be",
         formattedDate,
         20,
-        null
+        null,
+        true
     )
     private var medicijnen: Array<MedicijnInKast> = arrayOf(med1, med2, med3)
 
@@ -48,11 +52,11 @@ class MockupMedicijnkastDB {
         return medList
     }
 
-    fun removeMedicijn(medicijn: MedicijnInKast) {
-        val result = medicijnen.toMutableList()
-        result.remove(medicijn)
-        medicijnen = result.toTypedArray()
-    }
+//    fun removeMedicijn(medicijn: MedicijnInKast) {
+//        val result = medicijnen.toMutableList()
+//        result.remove(medicijn)
+//        medicijnen = result.toTypedArray()
+//    }
 }
 
 

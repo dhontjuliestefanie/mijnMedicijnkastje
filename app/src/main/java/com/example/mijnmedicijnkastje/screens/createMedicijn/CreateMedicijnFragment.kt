@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.mijnmedicijnkastje.R
+import com.example.mijnmedicijnkastje.database.MedicijnInKastDatabase
 import com.example.mijnmedicijnkastje.databinding.FragmentCreateMedicijnBinding
 
 class CreateMedicijnFragment : Fragment() {
@@ -31,8 +32,9 @@ class CreateMedicijnFragment : Fragment() {
             false
         )
 
-        //        val medicijn = MedicijnFragmentArgs.fromBundle(requireArguments()).medicijn
-        val fact = CreateMedicijnModelFactory()
+        val application = requireNotNull(this.activity).application
+        val dataSource = MedicijnInKastDatabase.getInstance(application).medicijnDatabaseDAO
+        val fact = CreateMedicijnModelFactory(dataSource, application)
 
         viewModel = ViewModelProvider(this, fact).get(CreateMedicijnViewModel::class.java)
         binding.createMedicijnViewModel = viewModel
@@ -52,13 +54,12 @@ class CreateMedicijnFragment : Fragment() {
     private fun voegToeAanMedicijnkast() {
         findNavController()
             .navigate(CreateMedicijnFragmentDirections.actionCreateMedicijnFragmentToUserActivity())
-        Toast.makeText(activity, "Medicijn is toegevoegd", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, "Medicijn is toegevoegd", Toast.LENGTH_LONG).show()
         viewModel.navigateToMedicijnKastFinished()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.
-        onNavDestinationSelected(item,requireView().findNavController())
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
     }
 }

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "medicijnen_in_kast_table")
 data class MedicijnInKast(
     @PrimaryKey(autoGenerate = true)
-    var medId: Int? = null,
+    var medId: Int? = 0,
 
     @ColumnInfo(name = "naam")
     var naam: String? = null,
@@ -25,5 +25,8 @@ data class MedicijnInKast(
     var aantal: Int = 20,
 
     @ColumnInfo(name = "extraInfo")
-    var extraInfo: String? = null
+    var extraInfo: String? = null,
+
+    @ColumnInfo(name = "dagelijkseMedicatie")
+    var dagelijkseMedicatie: Boolean = false
 )

@@ -52,7 +52,7 @@ class MedicijnListViewModel : ViewModel() {
     private fun getMeds() {
         viewModelScope.launch {
             try {
-                val listResult = MedicijnAPI.retrofitService.getProperties()
+                val listResult = MedicijnAPI.retrofitService.getMedicijnByName("Nurofen")
                 _response.value = "Success: ${listResult} properties retrieved"
             } catch (e: Exception) {
                 _response.value = "Failure: ${e.message}"

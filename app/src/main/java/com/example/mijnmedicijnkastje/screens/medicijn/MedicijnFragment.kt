@@ -1,5 +1,8 @@
 package com.example.mijnmedicijnkastje.screens.medicijn
 
+import android.app.DatePickerDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -8,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -15,6 +19,8 @@ import androidx.navigation.ui.NavigationUI
 import com.example.mijnmedicijnkastje.R
 import com.example.mijnmedicijnkastje.database.MedicijnInKastDatabase
 import com.example.mijnmedicijnkastje.databinding.FragmentMedicijnBinding
+import com.example.mijnmedicijnkastje.util.DatePickerFragment
+
 
 class MedicijnFragment : Fragment() {
 
@@ -47,17 +53,32 @@ class MedicijnFragment : Fragment() {
             }
         })
 
-        showDatePickerDialog()
+        viewModel.timePickerDialogData.observe(viewLifecycleOwner, Observer {
+            it
+            if (it) {
+                showDatePickerDialog()
+            }
+        })
+
+        viewModel.linkToWebsite.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it) {
+                goToWebsite()
+            }
+        })
         setHasOptionsMenu(true)
 
         return binding.root
     }
 
     private fun showDatePickerDialog() {
-        val mPickTimeBtn = binding.btnCalenderDialog
-        val textView = binding.kiesHoudbaarheidsdatum
-        val context = this.requireContext()
-        viewModel.showDatePickerDialog(mPickTimeBtn, textView, context)
+        val newFragment =
+            DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                val selectedDate = day.toString() + "/" + (month + 1) + "/" + year
+                viewModel.medicijn.value?.houdbaarheidsdatum = selectedDate
+                binding.kiesHoudbaarheidsdatum.text = selectedDate
+            })
+        newFragment.show(requireFragmentManager(), "datePicker")
+        viewModel.btnCalendarDialogClickFinished()
     }
 
     private fun navigateMedicijnkast() {
@@ -65,6 +86,17 @@ class MedicijnFragment : Fragment() {
             .navigate(MedicijnFragmentDirections.actionMedicijnFragment3ToUserActivity())
         viewModel.navigateToMedicijnKastFinished()
         Toast.makeText(activity, "Medicijn is toegevoegd", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun goToWebsite() {
+        viewModel.medicijn.value?.let { goToUrl ( it.linkInfo) }
+        viewModel.btnMeerInfoEnBijsluiterClickFinished()
+    }
+
+    private fun goToUrl(url: String) {
+        val uriUrl: Uri = Uri.parse(url)
+        val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
+        startActivity(launchBrowser)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -1,11 +1,11 @@
 package com.example.mijnmedicijnkastje.screens.medicijnkast
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mijnmedicijnkastje.R
 import com.example.mijnmedicijnkastje.database.MedicijnInKastDatabase
 import com.example.mijnmedicijnkastje.databinding.FragmentMedicijnkastBinding
+import com.example.mijnmedicijnkastje.util.CustomDialog
 
 class MedicijnkastFragment : Fragment() {
 
@@ -32,10 +33,8 @@ class MedicijnkastFragment : Fragment() {
             container,
             false
         )
-        val adapter = ListMedicijnkastAdapter(MedicijnInKastClickListener {
-            viewModel.clickMedicijn(it)
-            viewModel.removeMedicijn(it)
-        })
+        val adapter =
+            ListMedicijnkastAdapter(MedicijnInKastClickListener { viewModel.clickMedicijn(it) })
 
         val application = requireNotNull(this.activity).application
         val dataSource = MedicijnInKastDatabase.getInstance(application).medicijnDatabaseDAO
@@ -44,17 +43,6 @@ class MedicijnkastFragment : Fragment() {
         viewModel = ViewModelProvider(this, fact).get(MedicijnkastViewModel::class.java)
         binding.medicijnkastViewModel = viewModel
 
-        viewModel.verwijderMedicijnUitKast.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            if (it) {
-                verwijderMedicijnUitLijst()
-            }
-        })
-
-        viewModel.meerInfoMedicijn.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            if (it) {
-                toonMeerInfoMedicijn()
-            }
-        })
         setHasOptionsMenu(true)
 
         binding.listMedicijnkast.adapter = adapter
@@ -68,15 +56,30 @@ class MedicijnkastFragment : Fragment() {
         val manager = LinearLayoutManager(activity)
         binding.listMedicijnkast.layoutManager = manager
 
+        adapter.deleteButtonTouched.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it) {
+                viewModel.medicijn.value = adapter.medicijn.value!!
+                deleteMedicijnVanLijst()
+            }
+        })
+
+        adapter.meerInfoButtonTouched.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it) {
+                toonMeerInfoMedicijn()
+            }
+        })
+
         return binding.root
     }
 
-    private fun verwijderMedicijnUitLijst() {
-        Toast.makeText(activity, "Medicijn is verwijderd", Toast.LENGTH_SHORT).show()
+    private fun toonMeerInfoMedicijn() {
+        val newDialog = CustomDialog.newInstance("titeljulie", "subtiteldhont")
+        newDialog.show(requireFragmentManager(), "dialogscreen")
+        Log.i("InfoDialogScreen", "we zitten hier toch al")
     }
 
-    private fun toonMeerInfoMedicijn() {
-        Toast.makeText(activity, "Dialoogvenster in opmaak", Toast.LENGTH_SHORT).show()
+    private fun deleteMedicijnVanLijst() {
+        viewModel.delete()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
