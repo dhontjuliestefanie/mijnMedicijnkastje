@@ -1,5 +1,6 @@
 package com.example.mijnmedicijnkastje.screens.createMedicijn
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -15,6 +17,7 @@ import androidx.navigation.ui.NavigationUI
 import com.example.mijnmedicijnkastje.R
 import com.example.mijnmedicijnkastje.database.MedicijnInKastDatabase
 import com.example.mijnmedicijnkastje.databinding.FragmentCreateMedicijnBinding
+import com.example.mijnmedicijnkastje.util.DatePickerFragment
 
 class CreateMedicijnFragment : Fragment() {
 
@@ -46,7 +49,14 @@ class CreateMedicijnFragment : Fragment() {
             }
         })
 
+        viewModel.timePickerDialogData.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                showDatePickerDialog()
+            }
+        })
+
         setHasOptionsMenu(true)
+        binding.invulveldAantal.setText(viewModel.aantal.value.toString())
 
         return binding.root
     }
@@ -61,5 +71,17 @@ class CreateMedicijnFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
+    }
+
+
+    private fun showDatePickerDialog() {
+        val newFragment =
+            DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                val selectedDate = day.toString() + "/" + (month + 1) + "/" + year
+                viewModel.houdbaarheidsdatum.value = selectedDate
+                binding.kiesHoudbaarheidsdatum.text = selectedDate
+            })
+        newFragment.show(requireFragmentManager(), "datePicker")
+        viewModel.btnCalendarDialogClickFinished()
     }
 }

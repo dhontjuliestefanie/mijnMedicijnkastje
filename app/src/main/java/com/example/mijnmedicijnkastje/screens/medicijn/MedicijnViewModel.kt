@@ -32,7 +32,6 @@ class MedicijnViewModel(__medicijn: Medicijn,  val database: MedicijnDatabaseDAO
         }
     }
 
-
     private val _navigateToMedicijnkast = MutableLiveData<Boolean>()
     val navigateToMedicijnkast: LiveData<Boolean>
         get() {
@@ -43,27 +42,9 @@ class MedicijnViewModel(__medicijn: Medicijn,  val database: MedicijnDatabaseDAO
         _navigateToMedicijnkast.value = false
     }
 
-
     fun btnNavigateToMedicijnKastClicked() {
-//        onStartTracking()
         _navigateToMedicijnkast.value = true
     }
-
-//    fun onStartTracking() {
-//        viewModelScope.launch {
-//            val newMedicijnInKast = MedicijnInKast()
-//            newMedicijnInKast.naam = _medicijn.value?.naam
-//            newMedicijnInKast.registratienr = medicijn.value?.registratienr
-//            newMedicijnInKast.houdbaarheidsdatum = medicijn.value?.houdbaarheidsdatum
-//            newMedicijnInKast.extraInfo = medicijn.value?.extraInfo
-//            newMedicijnInKast.linkInfo = medicijn.value?.linkInfo
-//            insert(newMedicijnInKast)
-//        }
-//    }
-//
-//    private suspend fun insert(medicijnInKast: MedicijnInKast) {
-//        database.insert(medicijnInKast)
-//    }
 
     fun navigateToMedicijnKastFinished() {
         _navigateToMedicijnkast.value = false

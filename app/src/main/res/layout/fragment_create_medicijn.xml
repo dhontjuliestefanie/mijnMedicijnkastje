@@ -51,6 +51,7 @@
                 android:background="@drawable/border"
                 android:inputType="textMultiLine"
                 android:padding="10dp"
+                android:text="@={createMedicijnViewModel.naamMedicijn}"
                 android:textColorHint="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +76,7 @@
                 android:background="@drawable/border"
                 android:inputType="textMultiLine"
                 android:padding="10dp"
+                android:text="@={createMedicijnViewModel.registratienummer}"
                 android:textColorHint="@color/grey"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblRegistratienrZelf" />
@@ -89,15 +91,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/invulveldRegistratienummer" />
 
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/kiesHoudbaarheidsdatum"
+                style="@style/gegevensMedicijnVet"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@color/lightgreen"
-                android:theme="@style/Theme.AppCompat.Light"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="@{createMedicijnViewModel.houdbaarheidsdatum}"
+                app:layout_constraintStart_toStartOf="@+id/lblHoudbaarheidsdatumZelf"
                 app:layout_constraintTop_toBottomOf="@+id/lblHoudbaarheidsdatumZelf" />
+
+            <Button
+                android:id="@+id/btnCalenderDialog"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/calendar_icon"
+                android:onClick="@{() -> createMedicijnViewModel.btnCalendarDialogClick()}"
+                app:layout_constraintStart_toEndOf="@+id/kiesHoudbaarheidsdatum"
+                app:layout_constraintTop_toTopOf="@+id/kiesHoudbaarheidsdatum"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/lblAantalZelf"
@@ -107,7 +120,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Aantal:"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+                app:layout_constraintTop_toBottomOf="@+id/btnCalenderDialog" />
 
             <EditText
                 android:id="@+id/invulveldAantal"
@@ -118,6 +131,7 @@
                 android:background="@drawable/border"
                 android:inputType="number"
                 android:padding="10dp"
+                android:text=""
                 android:textColorHint="@color/grey"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblAantalZelf" />
@@ -141,6 +155,7 @@
                 android:background="@drawable/border"
                 android:inputType="textMultiLine"
                 android:padding="10dp"
+                android:text="@={createMedicijnViewModel.extraInfo}"
                 android:textColorHint="@color/grey"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblExtraInfoZelf" />
@@ -150,11 +165,11 @@
                 style="@style/pinkButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:onClick="@{() -> createMedicijnViewModel.btnNavigateToMedicijnKastClicked()}"
                 android:text="@string/voegToe"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/invulveldExtraInfo" />
+                app:layout_constraintTop_toBottomOf="@+id/invulveldExtraInfo"
+                tools:layout_editor_absoluteX="53dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

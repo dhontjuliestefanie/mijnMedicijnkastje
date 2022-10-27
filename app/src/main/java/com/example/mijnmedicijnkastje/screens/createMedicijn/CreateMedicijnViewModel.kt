@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.mijnmedicijnkastje.database.MedicijnDatabaseDAO
 import com.example.mijnmedicijnkastje.database.MedicijnInKast
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CreateMedicijnViewModel(val database: MedicijnDatabaseDAO, application: Application) :
     AndroidViewModel(application) {
@@ -28,21 +30,42 @@ class CreateMedicijnViewModel(val database: MedicijnDatabaseDAO, application: Ap
         _voegToeAanMedicijnkast.value = false
     }
 
+    var naamMedicijn = MutableLiveData<String>()
+    var registratienummer = MutableLiveData<String>()
+    var aantal = MutableLiveData<Int>()
+    var houdbaarheidsdatum = MutableLiveData<String>()
+    var linkInfo = MutableLiveData<String>()
+    var extraInfo = MutableLiveData<String>()
+
+
+    val today = Calendar.getInstance().time
+    val formatter = SimpleDateFormat("dd/MM/yyyy")
+    val formattedDate = formatter.format(today)
+
+    init {
+        naamMedicijn.value = ""
+        registratienummer.value = ""
+        houdbaarheidsdatum.value = formattedDate
+        aantal.value = 0
+        linkInfo.value = ""
+        extraInfo.value = ""
+    }
+
+
     fun btnNavigateToMedicijnKastClicked() {
         maakNieuwMedicijnAan()
         _medicijnVoorKast.value?.let { insert() }
         _voegToeAanMedicijnkast.value = true
-
     }
 
     fun maakNieuwMedicijnAan() {
         val newMedicijnInKast = MedicijnInKast()
-        newMedicijnInKast.naam = "Julie"
-        newMedicijnInKast.registratienr = "1234"
-        newMedicijnInKast.aantal = 30
-        newMedicijnInKast.houdbaarheidsdatum = "03/07/1986"
-        newMedicijnInKast.linkInfo = "www.julie.be"
-        newMedicijnInKast.extraInfo = "iedere dag om 18u een pilleke"
+        newMedicijnInKast.naam = naamMedicijn.value
+        newMedicijnInKast.registratienr = registratienummer.value
+        newMedicijnInKast.aantal = aantal.value!!
+        newMedicijnInKast.houdbaarheidsdatum = houdbaarheidsdatum.value
+        newMedicijnInKast.linkInfo = linkInfo.value
+        newMedicijnInKast.extraInfo = extraInfo.value
         _medicijnVoorKast.value = newMedicijnInKast
     }
 
@@ -54,8 +77,24 @@ class CreateMedicijnViewModel(val database: MedicijnDatabaseDAO, application: Ap
         viewModelScope.launch {
             _medicijnVoorKast.value?.let { database.insert(it) }
         }
-
     }
 
+    private var _timePickerDialogData: MutableLiveData<Boolean> = MutableLiveData()
+    val timePickerDialogData: LiveData<Boolean>
+        get() {
+            return _timePickerDialogData
+        }
+
+    init {
+        _timePickerDialogData.value = false
+    }
+
+    fun btnCalendarDialogClick() {
+        _timePickerDialogData.value = true
+    }
+
+    fun btnCalendarDialogClickFinished() {
+        _timePickerDialogData.value = false
+    }
 
 }

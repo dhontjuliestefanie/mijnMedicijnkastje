@@ -53,8 +53,7 @@ class MedicijnFragment : Fragment() {
             }
         })
 
-        viewModel.timePickerDialogData.observe(viewLifecycleOwner, Observer {
-            it
+        viewModel.timePickerDialogData.observe(viewLifecycleOwner, Observer {it
             if (it) {
                 showDatePickerDialog()
             }
@@ -77,7 +76,7 @@ class MedicijnFragment : Fragment() {
                 viewModel.medicijn.value?.houdbaarheidsdatum = selectedDate
                 binding.kiesHoudbaarheidsdatum.text = selectedDate
             })
-        newFragment.show(requireFragmentManager(), "datePicker")
+        newFragment.show(requireFragmentManager(), "datum")
         viewModel.btnCalendarDialogClickFinished()
     }
 
@@ -89,7 +88,7 @@ class MedicijnFragment : Fragment() {
     }
 
     private fun goToWebsite() {
-        viewModel.medicijn.value?.let { goToUrl ( it.linkInfo) }
+        viewModel.medicijn.value?.let { goToUrl(it.linkInfo) }
         viewModel.btnMeerInfoEnBijsluiterClickFinished()
     }
 
