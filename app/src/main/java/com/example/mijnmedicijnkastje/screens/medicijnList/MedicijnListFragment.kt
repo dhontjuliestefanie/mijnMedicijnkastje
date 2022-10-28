@@ -55,7 +55,7 @@ class MedicijnListFragment : Fragment() {
             viewModel.clickMedicijn(it)
         })
 
-
+//        viewModel.getMeds()
         viewModel.medicijn.observe(viewLifecycleOwner, Observer { medicijn ->
             medicijn?.let {
                 requireView().findNavController().navigate(

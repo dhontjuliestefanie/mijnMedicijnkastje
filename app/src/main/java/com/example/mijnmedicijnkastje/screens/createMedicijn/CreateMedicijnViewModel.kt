@@ -37,7 +37,6 @@ class CreateMedicijnViewModel(val database: MedicijnDatabaseDAO, application: Ap
     var linkInfo = MutableLiveData<String>()
     var extraInfo = MutableLiveData<String>()
 
-
     val today = Calendar.getInstance().time
     val formatter = SimpleDateFormat("dd/MM/yyyy")
     val formattedDate = formatter.format(today)
