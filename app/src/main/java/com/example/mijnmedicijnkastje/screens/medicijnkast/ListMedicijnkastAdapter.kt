@@ -67,7 +67,11 @@ class ListMedicijnkastAdapter(
         }
         holder.binding.btnDecreaseDosis.setOnClickListener {
             _medicijn.value = holder.binding.medicijn!!
-            _medicijn.value!!.aantal = _medicijn.value!!.aantal.plus(-1)
+            if (_medicijn.value!!.aantal > 0) {
+                _medicijn.value!!.aantal = _medicijn.value!!.aantal.plus(-1)
+            } else {
+                _medicijn.value!!.aantal = 0
+            }
             holder.binding.kiesAantalDosissen.setText(_medicijn.value!!.aantal.toString())
             _decreaseAantalTouched.value = true
         }
