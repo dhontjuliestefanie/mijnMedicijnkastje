@@ -1,7 +1,6 @@
 package com.example.mijnmedicijnkastje.screens.medicijnList
 
 import MedicijnBase
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +18,12 @@ class MedicijnListViewModel : ViewModel() {
         get() {
             return _medicijn
         }
+
+//    private val _medicijnen = MutableLiveData<List<Records>>()
+//    val medicijnen: LiveData<List<Records>>
+//        get() {
+//            return _medicijnen
+//        }
 
     private val _medicijnen = MockupMedicijnDB().getMedicijnen()
     val medicijnen: LiveData<List<Medicijn>>
@@ -57,8 +62,7 @@ class MedicijnListViewModel : ViewModel() {
             override fun onResponse(call: Call<MedicijnBase>, response: Response<MedicijnBase>) {
                 _response.value =
                     "${response.body()?.result?.records?.size} Medicijn properties retrieved"
-                val lst = response.body()?.result?.records
-                Log.i("Julie", lst.toString())
+//                _medicijnen.value = response.body()?.result?.records
             }
 
             override fun onFailure(call: Call<MedicijnBase>, t: Throwable) {

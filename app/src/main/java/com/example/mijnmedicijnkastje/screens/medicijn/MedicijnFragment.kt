@@ -88,11 +88,12 @@ class MedicijnFragment : Fragment() {
     }
 
     private fun goToWebsite() {
-        viewModel.medicijn.value?.let { goToUrl(it.linkInfo) }
+//        viewModel.medicijn.value.let { goToUrl(it.linkInfo) }
+        goToUrl(viewModel.medicijn.value?.linkInfo)
         viewModel.btnMeerInfoEnBijsluiterClickFinished()
     }
 
-    private fun goToUrl(url: String) {
+    private fun goToUrl(url: String?) {
         val uriUrl: Uri = Uri.parse(url)
         val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
         startActivity(launchBrowser)

@@ -13,7 +13,7 @@ class MedicijnViewModel(__medicijn: Medicijn,  val database: MedicijnDatabaseDAO
         get() {
             return _medicijn
         }
-    var aantal = MutableLiveData<Int>()
+    var aantal = MutableLiveData<Int?>()
 
     init {
         _medicijn.value = __medicijn

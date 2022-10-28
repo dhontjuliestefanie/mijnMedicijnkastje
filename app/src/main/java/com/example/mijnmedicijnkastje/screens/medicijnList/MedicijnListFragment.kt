@@ -1,5 +1,6 @@
 package com.example.mijnmedicijnkastje.screens.medicijnList
 
+import Records
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -55,7 +56,6 @@ class MedicijnListFragment : Fragment() {
             viewModel.clickMedicijn(it)
         })
 
-//        viewModel.getMeds()
         viewModel.medicijn.observe(viewLifecycleOwner, Observer { medicijn ->
             medicijn?.let {
                 requireView().findNavController().navigate(
@@ -81,7 +81,9 @@ class MedicijnListFragment : Fragment() {
     }
 
     private fun navigateMedicijnDetail() {
-        val medicijn: Medicijn = viewModel.medicijn.value!!
+//        val record = viewModel.medicijn.value!!
+//        val medicijn: Medicijn = Medicijn(record.productnaam, record.registratienummer, null, null, null, null)
+        val medicijn = viewModel.medicijn.value!!
         findNavController()
             .navigate(
                 MedicijnListFragmentDirections.actionMedicijnListFragment4ToMedicijnFragment3(
