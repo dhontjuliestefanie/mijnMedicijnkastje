@@ -1,3 +1,5 @@
+import com.example.mijnmedicijnkastje.models.Records
+
 /*
 Copyright (c) 2022 Kotlin Data Classes Generated from JSON powered by http://www.json2kotlin.com
 

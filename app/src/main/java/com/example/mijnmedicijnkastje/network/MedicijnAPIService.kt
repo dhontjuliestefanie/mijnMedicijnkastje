@@ -20,7 +20,7 @@ private val retrofit = Retrofit.Builder().addConverterFactory(MoshiConverterFact
 
 interface MedicijnAPIService {
 //    @GET("https://data.openstate.eu/nl/api/3/action/datastore_search?q=Nurofen&resource_id=1efaa651-add9-40f5-8b0c-2c2f2d352e11&limit=21529") //zoeken op naam
-    @GET("https://data.openstate.eu/nl/api/3/action/datastore_search?&resource_id=1efaa651-add9-40f5-8b0c-2c2f2d352e11&limit=21529")
+    @GET("https://data.openstate.eu/nl/api/3/action/datastore_search?&resource_id=1efaa651-add9-40f5-8b0c-2c2f2d352e11&limit=100")
     fun getProperties(): Call<MedicijnBase>
 }
 

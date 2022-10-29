@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mijnmedicijnkastje.models.Medicijn
-import com.example.mijnmedicijnkastje.models.MockupMedicijnDB
 import com.example.mijnmedicijnkastje.network.MedicijnAPI
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,14 +18,8 @@ class MedicijnListViewModel : ViewModel() {
             return _medicijn
         }
 
-//    private val _medicijnen = MutableLiveData<List<Records>>()
-//    val medicijnen: LiveData<List<Records>>
-//        get() {
-//            return _medicijnen
-//        }
-
-    private val _medicijnen = MockupMedicijnDB().getMedicijnen()
-    val medicijnen: LiveData<List<Medicijn>>
+    private val _medicijnen = MutableLiveData<List<Medicijn>?>()
+    val medicijnen: MutableLiveData<List<Medicijn>?>
         get() {
             return _medicijnen
         }
@@ -48,8 +41,6 @@ class MedicijnListViewModel : ViewModel() {
     }
 
     private val _response = MutableLiveData<String>()
-
-    // The external immutable LiveData for the response String
     val response: LiveData<String>
         get() = _response
 
@@ -57,12 +48,15 @@ class MedicijnListViewModel : ViewModel() {
         getMedicijnProperties()
     }
 
+
     private fun getMedicijnProperties() {
         MedicijnAPI.retrofitService.getProperties().enqueue(object : Callback<MedicijnBase> {
             override fun onResponse(call: Call<MedicijnBase>, response: Response<MedicijnBase>) {
                 _response.value =
                     "${response.body()?.result?.records?.size} Medicijn properties retrieved"
-//                _medicijnen.value = response.body()?.result?.records
+                val recordlist = response.body()?.result?.records
+//                var nameMap: List<Model> = persons.map { Model(it.name,it.number) };
+                _medicijnen.value = recordlist?.map { Medicijn(it.productnaam, it.registratienummer, it.productnaam_link, null, 20, null) }
             }
 
             override fun onFailure(call: Call<MedicijnBase>, t: Throwable) {

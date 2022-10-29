@@ -1,3 +1,5 @@
+package com.example.mijnmedicijnkastje.models
+
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 

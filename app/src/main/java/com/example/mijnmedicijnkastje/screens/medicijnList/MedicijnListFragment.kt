@@ -1,6 +1,5 @@
 package com.example.mijnmedicijnkastje.screens.medicijnList
 
-import Records
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -16,7 +15,6 @@ import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mijnmedicijnkastje.R
 import com.example.mijnmedicijnkastje.databinding.FragmentMedicijnListBinding
-import com.example.mijnmedicijnkastje.models.Medicijn
 
 class MedicijnListFragment : Fragment() {
 
@@ -39,11 +37,11 @@ class MedicijnListFragment : Fragment() {
         viewModel = ViewModelProvider(this, fact).get(MedicijnListViewModel::class.java)
         binding.medicijnListViewModel = viewModel
 
-        viewModel.navigateToMedicijnDetail.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            if (it) {
-                navigateMedicijnDetail()
-            }
-        })
+//        viewModel.navigateToMedicijnDetail.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+//            if (it) {
+//                navigateMedicijnDetail()
+//            }
+//        })
 
         viewModel.createMedicijn.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (it) {
