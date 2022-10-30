@@ -88,7 +88,6 @@ class MedicijnFragment : Fragment() {
     }
 
     private fun goToWebsite() {
-//        viewModel.medicijn.value.let { goToUrl(it.linkInfo) }
         goToUrl(viewModel.medicijn.value?.linkInfo)
         viewModel.btnMeerInfoEnBijsluiterClickFinished()
     }

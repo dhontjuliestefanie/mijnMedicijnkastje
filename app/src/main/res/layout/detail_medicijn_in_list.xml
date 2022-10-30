@@ -18,11 +18,14 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/medicijn1"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/border_shadow"
+        android:minHeight="150dp"
         android:onClick="@{() -> clickListener.onClick(medicijn)}"
-        app:cardBackgroundColor="@color/white">
+        app:cardBackgroundColor="@color/white"
+        android:paddingBottom="15dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,12 +34,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="154dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/pil" />
+                android:layout_height="150dp"
+                android:background="@drawable/pil"
+                android:minHeight="150dp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/naamMedicijnCard"

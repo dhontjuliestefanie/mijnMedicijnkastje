@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -37,22 +38,20 @@ class MedicijnListFragment : Fragment() {
         viewModel = ViewModelProvider(this, fact).get(MedicijnListViewModel::class.java)
         binding.medicijnListViewModel = viewModel
 
-//        viewModel.navigateToMedicijnDetail.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-//            if (it) {
-//                navigateMedicijnDetail()
-//            }
-//        })
-
-        viewModel.createMedicijn.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            if (it) {
-                createMedicijn()
-            }
-        })
-        setHasOptionsMenu(true)
-
         val adapter = ListMedicijnAdapter(MedicijnClickListener {
             viewModel.clickMedicijn(it)
         })
+        binding.listMed.adapter = adapter
+        viewModel.medicijnen.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
+        binding.lifecycleOwner = viewLifecycleOwner
+        val manager = LinearLayoutManager(activity)
+        binding.listMed.layoutManager = manager
+
+        performSearch(adapter)
 
         viewModel.medicijn.observe(viewLifecycleOwner, Observer { medicijn ->
             medicijn?.let {
@@ -65,30 +64,14 @@ class MedicijnListFragment : Fragment() {
             }
         })
 
-        binding.listMed.adapter = adapter
-        viewModel.medicijnen.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
+        viewModel.createMedicijn.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it) {
+                createMedicijn()
             }
         })
 
-        binding.lifecycleOwner = viewLifecycleOwner
-        val manager = LinearLayoutManager(activity)
-        binding.listMed.layoutManager = manager
+        setHasOptionsMenu(true)
         return binding.root
-    }
-
-    private fun navigateMedicijnDetail() {
-//        val record = viewModel.medicijn.value!!
-//        val medicijn: Medicijn = Medicijn(record.productnaam, record.registratienummer, null, null, null, null)
-        val medicijn = viewModel.medicijn.value!!
-        findNavController()
-            .navigate(
-                MedicijnListFragmentDirections.actionMedicijnListFragment4ToMedicijnFragment3(
-                    medicijn
-                )
-            )
-        viewModel.navigateToMedicijnDetailFinished()
     }
 
     private fun createMedicijn() {
@@ -102,5 +85,23 @@ class MedicijnListFragment : Fragment() {
                 || super.onOptionsItemSelected(item)
     }
 
+    private fun performSearch(adapter: ListMedicijnAdapter) {
+        binding.searchInMedicijnLijst.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    var nieuweLijst = newText?.let { viewModel.getFilterdeLijst(it) }
+                    adapter.submitList(nieuweLijst)
+                } else {
+                    adapter.submitList(viewModel.medicijnen.value)
+                }
+                return true
+            }
+        })
+    }
 }
 
