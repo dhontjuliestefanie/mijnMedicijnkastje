@@ -89,15 +89,16 @@ class MedicijnListFragment : Fragment() {
         binding.searchInMedicijnLijst.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    var nieuweLijst = viewModel.getFilterdeLijst(query)
+                    adapter.submitList(nieuweLijst)
+                }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText != null) {
-                    var nieuweLijst = newText?.let { viewModel.getFilterdeLijst(it) }
-                    adapter.submitList(nieuweLijst)
-                } else {
-                    adapter.submitList(viewModel.medicijnen.value)
+                if (newText == null) {
+                    adapter.submitList(null)
                 }
                 return true
             }

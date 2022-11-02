@@ -34,7 +34,8 @@
                 app:fontFamily="@font/lato"
                 app:layout_constraintTop_toTopOf="parent"
                 app:queryHint="@string/edit_text_hint"
-                tools:layout_editor_absoluteX="25dp" />
+                tools:layout_editor_absoluteX="25dp"
+                app:iconifiedByDefault="false"/>
 
             <TextView
                 android:id="@+id/zoekresultatenLbl"
@@ -53,7 +54,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Toon enkel vervallen medicijnen"
                 android:textColor="@color/green"
                 android:textSize="12sp"
                 app:fontFamily="@font/lato"
@@ -61,7 +61,11 @@
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/zoekresultatenLbl"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
+                tools:ignore="UseSwitchCompatOrMaterialXml"
+                android:onClick="@{() -> medicijnkastViewModel.onActiveChanged()}"
+                android:checked="@={medicijnkastViewModel.switchActive}"
+                android:text="@={medicijnkastViewModel.switchText}"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_medicijnkast"

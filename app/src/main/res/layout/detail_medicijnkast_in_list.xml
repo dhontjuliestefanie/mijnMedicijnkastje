@@ -89,20 +89,29 @@
                     app:fontFamily="@font/lato"
                     app:layout_constraintStart_toStartOf="@+id/vervaldatumLabel"
                     app:layout_constraintTop_toBottomOf="@+id/vervaldatumLabel" />
-
-                <CheckBox
-                    android:id="@+id/checkBox"
-                    style="@style/vetteGroeneTekst"
+                <TextView
+                    android:id="@+id/extraInfoLabel"
+                    style="@style/labelVet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="-8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:buttonTint="@color/green"
-                    android:text="Dagelijkse medicatie"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/vervaldatum"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/extraInfo"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/lato"
+                    app:layout_constraintStart_toStartOf="@+id/registratienummer"
                     app:layout_constraintTop_toBottomOf="@+id/vervaldatum" />
+
+                <TextView
+                    android:id="@+id/extraInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{medicijn.extraInfo}"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/lato"
+                    app:layout_constraintStart_toStartOf="@+id/vervaldatumLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/extraInfoLabel" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -32,7 +32,7 @@ class CreateMedicijnViewModel(val database: MedicijnDatabaseDAO, application: Ap
 
     var naamMedicijn = MutableLiveData<String>()
     var registratienummer = MutableLiveData<String>()
-    var aantal = MutableLiveData<Int>()
+    var aantal = MutableLiveData<String>()
     var houdbaarheidsdatum = MutableLiveData<String>()
     var linkInfo = MutableLiveData<String>()
     var extraInfo = MutableLiveData<String>()
@@ -45,23 +45,61 @@ class CreateMedicijnViewModel(val database: MedicijnDatabaseDAO, application: Ap
         naamMedicijn.value = ""
         registratienummer.value = ""
         houdbaarheidsdatum.value = formattedDate
-        aantal.value = 0
+        aantal.value = ""
         linkInfo.value = ""
         extraInfo.value = ""
     }
 
+    private var _errorNaam = MutableLiveData<String>()
+    val errorNaam: LiveData<String>
+        get() {
+            return _errorNaam
+        }
+
+    private var _errorAantal = MutableLiveData<String>()
+    val errorAantal: LiveData<String>
+        get() {
+            return _errorAantal
+        }
+
+
+    private val _naamIngegeven = MutableLiveData<Boolean>()
+    val naamIngegeven: LiveData<Boolean>
+        get() {
+            return _naamIngegeven
+        }
+
+    private val _aantalIngegeven = MutableLiveData<Boolean>()
+    val aantalIngegeven: LiveData<Boolean>
+        get() {
+            return _aantalIngegeven
+        }
+
+    init {
+        _naamIngegeven.value = true
+        _aantalIngegeven.value = true
+    }
+
 
     fun btnNavigateToMedicijnKastClicked() {
-        _voegToeAanMedicijnkast.value = true
-        maakNieuwMedicijnAan()
-        _medicijnVoorKast.value?.let { insert() }
+        if (naamMedicijn.value.isNullOrBlank()) {
+            _naamIngegeven.value = false
+            _errorNaam.value = "Naam van het medicijn is verplicht"
+        } else if (Integer.parseInt(aantal.value) < 0) {
+            _aantalIngegeven.value = false
+            _errorAantal.value = "Gelieve een positief getal in te geven"
+        } else {
+            maakNieuwMedicijnAan()
+            _medicijnVoorKast.value?.let { insert() }
+            _voegToeAanMedicijnkast.value = true
+        }
     }
 
     fun maakNieuwMedicijnAan() {
         val newMedicijnInKast = MedicijnInKast()
         newMedicijnInKast.naam = naamMedicijn.value
         newMedicijnInKast.registratienr = registratienummer.value
-        newMedicijnInKast.aantal = aantal.value!!
+        newMedicijnInKast.aantal = Integer.parseInt(aantal.value)
         newMedicijnInKast.houdbaarheidsdatum = houdbaarheidsdatum.value
         newMedicijnInKast.linkInfo = linkInfo.value
         newMedicijnInKast.extraInfo = extraInfo.value

@@ -9,6 +9,10 @@ import com.example.mijnmedicijnkastje.network.MedicijnAPI
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.absoluteValue
+
 
 class MedicijnListViewModel : ViewModel() {
 
@@ -31,7 +35,6 @@ class MedicijnListViewModel : ViewModel() {
         }
 
 
-
     init {
         _medicijn.value = null
     }
@@ -50,10 +53,10 @@ class MedicijnListViewModel : ViewModel() {
             return _response
         }
 
-    private var _error = MutableLiveData<String>()
-    val error: LiveData<String>
+    private var _info = MutableLiveData<String>()
+    val info: LiveData<String>
         get() {
-            return _error
+            return _info
         }
 
     private var _loadingFinished = MutableLiveData<Boolean>()
@@ -63,34 +66,38 @@ class MedicijnListViewModel : ViewModel() {
         }
 
     init {
-        _error.value = ""
+        _info.value = ""
         _loadingFinished.value = false
+        _medicijnen.value = null
         getMedicijnProperties()
     }
 
+    private fun getToday(): String {
+        val today = Calendar.getInstance().time
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        return sdf.format(Date())
+    }
 
     private fun getMedicijnProperties() {
         MedicijnAPI.retrofitService.getProperties().enqueue(object : Callback<MedicijnBase> {
+            val today = getToday()
             override fun onResponse(call: Call<MedicijnBase>, response: Response<MedicijnBase>) {
-                _response.value =
-                    "${response.body()?.result?.records?.size} Medicijn properties retrieved"
                 val recordlist = response.body()?.result?.records
                 _alleMedicijnen.value = recordlist?.map {
                     Medicijn(
                         it.productnaam,
                         it.registratienummer,
                         it.productnaam_link,
-                        null,
+                        today,
                         20,
                         null
                     )
                 }
-                _medicijnen.value = alleMedicijnen.value?.subList(0,100)
                 _loadingFinished.value = true
             }
 
             override fun onFailure(call: Call<MedicijnBase>, t: Throwable) {
-                _error.value = "Failure: " + t.message
+                _info.value = "Failure: " + t.message
                 _loadingFinished.value = true
             }
         })
@@ -103,7 +110,17 @@ class MedicijnListViewModel : ViewModel() {
         }
 
     fun getFilterdeLijst(zoekterm: String): List<Medicijn>? {
-        var gefilterdeLijst = _alleMedicijnen.value?.filter { medicijn -> medicijn.naam.lowercase().contains(zoekterm.lowercase()) }
+        var gefilterdeLijst = _alleMedicijnen.value?.filter { medicijn ->
+            medicijn.naam.lowercase().contains(zoekterm.lowercase())
+        }
+        var aantalMeds = gefilterdeLijst?.size
+        if (aantalMeds?.absoluteValue!! > 0) {
+            _info.value = "${aantalMeds} medicijnen gevonden."
+        }
+        else {
+            _info.value = "Geen medicijn gevonden met de naam ${zoekterm}. \n Wil je zelf een medicijn aanmaken? \n Druk daarvoor op de roze knop."
+        }
+
         return gefilterdeLijst
     }
 

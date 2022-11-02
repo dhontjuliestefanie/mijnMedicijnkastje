@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="medicijnViewModel"
             type="com.example.mijnmedicijnkastje.screens.medicijn.MedicijnViewModel" />
@@ -26,6 +28,7 @@
 
             <TextView
                 android:id="@+id/naamMedicijn"
+                style="@style/groteTitelZwart"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="32dp"
@@ -33,8 +36,7 @@
                 app:fontFamily="@font/lato_bold"
                 app:layout_constraintBottom_toTopOf="@+id/registratieNrLabel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                style="@style/groteTitelZwart" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/registratieNrLabel"
@@ -67,30 +69,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="16dp"
+                android:onClick="@{() -> medicijnViewModel.btnMeerInfoEnBijsluiterClicked()}"
                 android:text="@string/meerInfoEnBijsluiter"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/registratieNr"
-                android:onClick="@{() -> medicijnViewModel.btnMeerInfoEnBijsluiterClicked()}"/>
+                app:layout_constraintTop_toBottomOf="@+id/registratieNr" />
 
             <TextView
                 android:id="@+id/aantalInMedicijnkastje"
+                style="@style/vetteRodeTekst"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/aantalDosissenInMedicijnkastje"
+                android:text="@{medicijnViewModel.aantalInMedKast}"
+                android:visibility='@{medicijnViewModel.medInKast ? View.GONE: View.VISIBLE}'
                 app:fontFamily="@font/lato_bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnMeerInfoEnBijsluiter"
-                style="@style/vetteRodeTekst" />
+                app:layout_constraintTop_toBottomOf="@+id/btnMeerInfoEnBijsluiter" />
 
             <TextView
                 android:id="@+id/houdbaarheidsdatumMediInKastje"
+                style="@style/doorlopendeTekst"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="4dp"
-                android:text="@string/houdbaarheidsdatum1610"
+                android:text="@{medicijnViewModel.houdbaarheidsdatumAlInKast}"
+                android:visibility='@{medicijnViewModel.medInKast ? View.GONE: View.VISIBLE}'
                 app:fontFamily="@font/lato"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/aantalInMedicijnkastje"
-                style="@style/doorlopendeTekst" />
+                app:layout_constraintTop_toBottomOf="@+id/aantalInMedicijnkastje" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/invulkaartMedicijnToevoegenAanKastje"
@@ -146,11 +150,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/calendar_icon"
+                    android:onClick="@{() -> medicijnViewModel.btnCalendarDialogClick()}"
                     app:layout_constraintStart_toEndOf="@+id/kiesHoudbaarheidsdatum"
                     app:layout_constraintTop_toTopOf="@+id/kiesHoudbaarheidsdatum"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
-                    android:onClick="@{() -> medicijnViewModel.btnCalendarDialogClick()}"
-                    />
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 <TextView
                     android:id="@+id/kiesAantalDosissen"
@@ -207,7 +210,7 @@
                     android:hint="@string/hintExtraInfo"
                     android:inputType="textMultiLine"
                     android:padding="10dp"
-                    android:text="@{medicijnViewModel.medicijn.extraInfo}"
+                    android:text="@={medicijnViewModel.medicijn.extraInfo}"
                     android:textColorHint="@color/grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -61,7 +61,7 @@ class CreateMedicijnFragment : Fragment() {
     }
 
     private fun voegToeAanMedicijnkast() {
-        viewModel.aantal.value = Integer.parseInt(binding.invulveldAantal.text.toString())
+//        viewModel.aantal.value = Integer.parseInt(binding.invulveldAantal.text.toString())
         findNavController()
             .navigate(CreateMedicijnFragmentDirections.actionCreateMedicijnFragmentToUserActivity())
         Toast.makeText(activity, "Medicijn is toegevoegd", Toast.LENGTH_LONG).show()

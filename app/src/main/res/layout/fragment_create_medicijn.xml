@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="createMedicijnViewModel"
             type="com.example.mijnmedicijnkastje.screens.createMedicijn.CreateMedicijnViewModel" />
@@ -42,6 +44,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titelZelfMedAanmaken" />
 
+            <TextView
+                android:id="@+id/errorNaam"
+                style="@style/titelHoofdletterExtraWitVet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{createMedicijnViewModel.errorNaam}"
+                android:visibility='@{createMedicijnViewModel.naamIngegeven ? View.GONE: View.VISIBLE}'
+                app:layout_constraintStart_toStartOf="@+id/naamMedicijnZelf"
+                app:layout_constraintTop_toBottomOf="@+id/naamMedicijnZelf" />
+
             <EditText
                 android:id="@+id/naamMedicijnZelf"
                 style="@style/doorlopendeTekstGroter"
@@ -54,7 +67,7 @@
                 android:text="@={createMedicijnViewModel.naamMedicijn}"
                 android:textColorHint="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/lblNaamMedicijnZelf"
                 app:layout_constraintTop_toBottomOf="@+id/lblNaamMedicijnZelf" />
 
             <TextView
@@ -65,7 +78,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/registratienrZelf"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/naamMedicijnZelf" />
+                app:layout_constraintTop_toBottomOf="@+id/errorNaam" />
 
             <EditText
                 android:id="@+id/invulveldRegistratienummer"
@@ -131,10 +144,21 @@
                 android:background="@drawable/border"
                 android:inputType="number"
                 android:padding="10dp"
-                android:text='@{""}'
+                android:text='@={createMedicijnViewModel.aantal}'
                 android:textColorHint="@color/grey"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblAantalZelf" />
+
+            <TextView
+                android:id="@+id/errorAantal"
+                style="@style/titelHoofdletterExtraWitVet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{createMedicijnViewModel.errorAantal}"
+                android:visibility='@{createMedicijnViewModel.aantalIngegeven ? View.GONE: View.VISIBLE}'
+                app:layout_constraintStart_toStartOf="@+id/naamMedicijnZelf"
+                app:layout_constraintTop_toBottomOf="@+id/invulveldAantal" />
 
             <TextView
                 android:id="@+id/lblExtraInfoZelf"
@@ -144,7 +168,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/extraInfo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/invulveldAantal" />
+                app:layout_constraintTop_toBottomOf="@+id/errorAantal" />
 
             <EditText
                 android:id="@+id/invulveldExtraInfo"

@@ -1,9 +1,12 @@
 package com.example.mijnmedicijnkastje.database
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "medicijnen_in_kast_table")
 data class MedicijnInKast(
     @PrimaryKey(autoGenerate = true)
@@ -29,4 +32,4 @@ data class MedicijnInKast(
 
     @ColumnInfo(name = "dagelijkseMedicatie")
     var dagelijkseMedicatie: Boolean = false
-)
+) : Parcelable

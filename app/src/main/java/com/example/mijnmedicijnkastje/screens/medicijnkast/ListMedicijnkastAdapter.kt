@@ -57,6 +57,7 @@ class ListMedicijnkastAdapter(
             _deleteButtonTouched.value = true
         }
         holder.binding.meerInfoMedicijn.setOnClickListener {
+            _medicijn.value = holder.binding.medicijn!!
             _meerInfoButtonTouched.value = true
         }
         holder.binding.btnIncreaseDosis.setOnClickListener {
