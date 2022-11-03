@@ -53,7 +53,8 @@ class MedicijnFragment : Fragment() {
             }
         })
 
-        viewModel.timePickerDialogData.observe(viewLifecycleOwner, Observer {it
+        viewModel.timePickerDialogData.observe(viewLifecycleOwner, Observer {
+            it
             if (it) {
                 showDatePickerDialog()
             }
@@ -72,7 +73,14 @@ class MedicijnFragment : Fragment() {
     private fun showDatePickerDialog() {
         val newFragment =
             DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                val selectedDate = day.toString() + "/" + (month + 1) + "/" + year
+                var dayS = ""
+                if (day < 10) {
+                    dayS = "0" + day
+                }
+                else {
+                    dayS = day.toString()
+                }
+                val selectedDate = dayS + "/" + (month + 1) + "/" + year
                 viewModel.medicijn.value?.houdbaarheidsdatum = selectedDate
                 binding.kiesHoudbaarheidsdatum.text = selectedDate
             })

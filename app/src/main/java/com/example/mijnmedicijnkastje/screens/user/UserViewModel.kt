@@ -1,48 +1,58 @@
 package com.example.mijnmedicijnkastje.screens.user
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.mijnmedicijnkastje.models.MockupUserDB
-import com.example.mijnmedicijnkastje.models.Persoon
+import androidx.lifecycle.viewModelScope
+import com.example.mijnmedicijnkastje.database.User
+import com.example.mijnmedicijnkastje.database.UserDatabaseDAO
+import kotlinx.coroutines.launch
 
-class UserViewModel : ViewModel() {
-//    private val persoon = Persoon(
-//        "Dhont",
-//        "Julie",
-//        "03/07/1986",
-//        "Medicijn 1 \n iedere dag voor het ontbijt  \n" +
-//                " Medicijn 2 \n" +
-//                " iedere avond"
-//    )
-//
-//    private val _naam = MutableLiveData<String>()
-//    val naam: LiveData<String>
-//        get() = _naam
-//
-//    private val _voornaam = MutableLiveData<String>()
-//    val voornaam: LiveData<String>
-//        get() = _voornaam
-//
-//    private val _geboortedatum = MutableLiveData<String>()
-//    val geboortedatum: LiveData<String>
-//        get() = _geboortedatum
-//
-//
-//    private val _dagMedicatie = MutableLiveData<String?>()
-//    val dagMedicatie: MutableLiveData<String?>
-//        get() = _dagMedicatie
+class UserViewModel(val database: UserDatabaseDAO, application: Application) :
+    AndroidViewModel(application) {
 
-    private val _persoon = MutableLiveData<Persoon?>()
-    val persoon: MutableLiveData<Persoon?>
-        get() = _persoon
+    private val _user = MutableLiveData<User?>()
+    val user: MutableLiveData<User?>
+        get() = _user
+
+    private var _addUserClicked = MutableLiveData<Boolean>()
+    val addUserClicked: LiveData<Boolean>
+        get() {
+            return _addUserClicked
+        }
+
+    private var _users = database.getAllUsers()
+    val users: LiveData<List<User>>
+        get() {
+            return _users
+        }
 
     init {
-//        _naam.value = this.persoon.naam
-//        _voornaam.value = this.persoon.voornaam
-//        _geboortedatum.value = this.persoon.geboortedatum
-//        _dagMedicatie.value = this.persoon.dagelijkseMedicatie
-        _persoon.value = MockupUserDB().getUser()
+        _addUserClicked.value = false
+    }
 
+    fun clickUser(user: User) {
+        _user.value = user
+    }
+
+    fun btnAddUserClicked() {
+        _addUserClicked.value = true
+    }
+
+    fun addUser(naam: String, voornaam: String, geboortedatum: String) {
+        val user = User(null, naam, voornaam, geboortedatum)
+        viewModelScope.launch {
+            database.insert(user)
+        }
+        _user.value = user
+    }
+
+    fun removeUser() {
+        viewModelScope.launch {
+            user.value?.let { database.delete(it) }
+        }
+        _user.value = null
     }
 
 }

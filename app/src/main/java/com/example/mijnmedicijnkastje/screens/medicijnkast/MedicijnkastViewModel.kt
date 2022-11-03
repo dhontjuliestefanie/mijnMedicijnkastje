@@ -15,7 +15,6 @@ class MedicijnkastViewModel(val database: MedicijnDatabaseDAO, application: Appl
     AndroidViewModel(application) {
 
     private var _medicijnkast = database.getAllMedicijnen()
-
     val medicijnkast: LiveData<List<MedicijnInKast>>
         get() {
             return _medicijnkast
@@ -92,15 +91,14 @@ class MedicijnkastViewModel(val database: MedicijnDatabaseDAO, application: Appl
         return text.value!!
     }
 
-    private fun getToday(): String {
+    private fun getToday(): Date {
         val today = Calendar.getInstance().time
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        return sdf.format(Date())
+        return today
     }
 
     fun getLijstVervallenProducten(currentList: MutableList<MedicijnInKast>): List<MedicijnInKast>? {
         var today = getToday()
-        var gefilterdeLijst = currentList.filter { medicijnInKast -> medicijnInKast.houdbaarheidsdatum!! < today}
+        var gefilterdeLijst = currentList.filter { medicijnInKast -> SimpleDateFormat("dd/MM/yyyy").parse(medicijnInKast.houdbaarheidsdatum!!) < today}
         return gefilterdeLijst
     }
 }

@@ -51,12 +51,6 @@ class MockupMedicijnkastDB {
         medList.value = medicijnen.toList()
         return medList
     }
-
-//    fun removeMedicijn(medicijn: MedicijnInKast) {
-//        val result = medicijnen.toMutableList()
-//        result.remove(medicijn)
-//        medicijnen = result.toTypedArray()
-//    }
 }
 
 

@@ -34,7 +34,6 @@ class MedicijnListViewModel : ViewModel() {
             return _alleMedicijnen
         }
 
-
     init {
         _medicijn.value = null
     }
@@ -73,7 +72,6 @@ class MedicijnListViewModel : ViewModel() {
     }
 
     private fun getToday(): String {
-        val today = Calendar.getInstance().time
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         return sdf.format(Date())
     }
