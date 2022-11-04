@@ -40,6 +40,7 @@ class UserFragment : Fragment() {
         val fact = UserModelFactory(dataSource, application)
 
         val adapter = ListUserAdapter(UserClickListener { viewModel.clickUser(it) })
+        val dagMedAdapter = DagMedAdapter(DagMedClickListener { viewModel.clickDagMed(it) })
 
         viewModel = ViewModelProvider(this, fact).get(UserViewModel::class.java)
         binding.userViewModel = viewModel
@@ -52,9 +53,19 @@ class UserFragment : Fragment() {
             }
         })
 
+        viewModel.addDagMedClicked.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it) {
+                addDagelijkseMedicatie()
+            }
+        })
+
         binding.listUser.adapter = adapter
         val manager = LinearLayoutManager(activity)
         binding.listUser.layoutManager = manager
+
+        val managerDagMedUser = LinearLayoutManager(activity)
+        binding.listMedsVanUser.adapter = dagMedAdapter
+        binding.listMedsVanUser.layoutManager = managerDagMedUser
 
         viewModel.users.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -62,11 +73,16 @@ class UserFragment : Fragment() {
             }
         })
 
+        viewModel.dagMedVanUser.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                dagMedAdapter.submitList(it)
+            }
+        })
+
         setHasOptionsMenu(true)
 
         return binding.root
     }
-
 
     private fun addUser() {
         val dialog = Dialog(requireContext())
@@ -82,6 +98,24 @@ class UserFragment : Fragment() {
             val geboortedatum =
                 dialog.findViewById<EditText>(R.id.editTextGeboortedatum).text.toString()
             viewModel.addUser(naam, voornaam, geboortedatum)
+            dialog.dismiss()
+        }
+        noBtn.setOnClickListener { dialog.dismiss() }
+        dialog.show()
+    }
+
+    private fun addDagelijkseMedicatie() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.fragment_dialog_add_dagmed)
+        val yesBtn = dialog.findViewById(R.id.btnAddDagMed) as Button
+        val noBtn = dialog.findViewById(R.id.btnCancelAddDagMed) as Button
+        yesBtn.setOnClickListener {
+            val naamMed =
+                dialog.findViewById<EditText>(R.id.etNaamMed).text.toString()
+            val tijdstip = dialog.findViewById<EditText>(R.id.etTijdstip).text.toString()
+            viewModel.addDagMedVanUser(naamMed, tijdstip)
             dialog.dismiss()
         }
         noBtn.setOnClickListener { dialog.dismiss() }

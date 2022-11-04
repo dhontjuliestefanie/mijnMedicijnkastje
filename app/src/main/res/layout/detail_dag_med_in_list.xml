@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dag_med"
+            type="com.example.mijnmedicijnkastje.database.DagelijkseMedicatie" />
+
+        <variable
+            name="clickListener"
+            type="com.example.mijnmedicijnkastje.screens.user.DagMedClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/titelHoofdletterExtraWitVet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{dag_med.naamMed}" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/titelHoofdletterExtraWitVet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{dag_med.tijdstip}"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

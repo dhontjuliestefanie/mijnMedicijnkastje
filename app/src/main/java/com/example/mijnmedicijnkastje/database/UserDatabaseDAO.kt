@@ -2,6 +2,7 @@ package com.example.mijnmedicijnkastje.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.mijnmedicijnkastje.database.relations.DagMedAndUser
 
 @Dao
 interface UserDatabaseDAO {
@@ -19,4 +20,19 @@ interface UserDatabaseDAO {
 
     @Query("SELECT * from user_table ORDER BY naam DESC")
     fun getAllUsers(): LiveData<List<User>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertDagMed(dagelijkseMedicatie: DagelijkseMedicatie)
+
+    @Delete
+    suspend fun deleteDagMed(dagelijkseMedicatie: DagelijkseMedicatie)
+
+    @Transaction
+    @Query("SELECT * FROM dag_med_table where idUser = :key")
+    suspend fun getDagMedAndUser(key: Int): List<DagMedAndUser>
+
+    @Transaction
+    @Query("SELECT * FROM dag_med_table")
+    fun getAllDagMedAndUser(): LiveData<List<DagMedAndUser>>
+
 }
