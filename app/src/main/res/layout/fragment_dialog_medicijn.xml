@@ -47,7 +47,10 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            android:background="@drawable/border_round"
+            android:padding="8dp"
+            />
 
         <TextView
             android:id="@+id/textView3"
@@ -81,7 +84,9 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            android:background="@drawable/border_round"
+            android:padding="8dp"/>
 
         <TextView
             android:id="@+id/textView5"
@@ -101,10 +106,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            android:background="@drawable/border_round"
+            android:padding="8dp"
+
+            />
 
         <Button
             android:id="@+id/btnCancel"

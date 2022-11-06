@@ -61,6 +61,8 @@ class MedicijnkastViewModel(val database: MedicijnDatabaseDAO, application: Appl
         return gefilterdeLijst
     }
 
+    // Code voor switch voor vervallen medicijnen
+
     private var _switchActive = MutableLiveData<Boolean>()
     val switchActive: MutableLiveData<Boolean>
         get() {
@@ -97,8 +99,8 @@ class MedicijnkastViewModel(val database: MedicijnDatabaseDAO, application: Appl
     }
 
     fun getLijstVervallenProducten(currentList: MutableList<MedicijnInKast>): List<MedicijnInKast>? {
-        var today = getToday()
-        var gefilterdeLijst = currentList.filter { medicijnInKast -> SimpleDateFormat("dd/MM/yyyy").parse(medicijnInKast.houdbaarheidsdatum!!) < today}
+        val today = getToday()
+        val gefilterdeLijst = currentList.filter { medicijnInKast -> SimpleDateFormat("dd/MM/yyyy").parse(medicijnInKast.houdbaarheidsdatum!!) < today}
         return gefilterdeLijst
     }
 }
