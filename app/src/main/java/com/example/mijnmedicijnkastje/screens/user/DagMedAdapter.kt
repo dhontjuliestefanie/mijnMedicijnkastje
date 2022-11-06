@@ -2,6 +2,7 @@ package com.example.mijnmedicijnkastje.screens.user
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +13,25 @@ import com.example.mijnmedicijnkastje.databinding.DetailDagMedInListBinding
 class DagMedAdapter(val clickListener: DagMedClickListener) :
     ListAdapter<DagelijkseMedicatie, DagMedAdapter.ViewHolder>(DagMedDiffCallback()) {
 
+    private var _deleteButtonTouched = MutableLiveData<Boolean>()
+    val deleteButtonTouched: MutableLiveData<Boolean>
+        get() {
+            return _deleteButtonTouched
+        }
+
+    private var _medicijn = MutableLiveData<DagelijkseMedicatie?>()
+    val medicijn: MutableLiveData<DagelijkseMedicatie?>
+        get() {
+            return _medicijn
+        }
+
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position)!!, clickListener)
+        holder.binding.deleteDagMed.setOnClickListener {
+            _medicijn.value = holder.binding.dagMed!!
+            _deleteButtonTouched.value = true
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

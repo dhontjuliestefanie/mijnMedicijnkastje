@@ -1,5 +1,6 @@
 package com.example.mijnmedicijnkastje.screens.user
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
@@ -55,7 +56,7 @@ class UserFragment : Fragment() {
 
         viewModel.addDagMedClicked.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (it) {
-                addDagelijkseMedicatie()
+                addDagelijkseMedicatie(dagMedAdapter)
             }
         })
 
@@ -79,9 +80,24 @@ class UserFragment : Fragment() {
             }
         })
 
+        dagMedAdapter.deleteButtonTouched.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it) {
+                viewModel.dagmed.value = dagMedAdapter.medicijn.value!!
+                deleteDagelijkseMedicatie()
+            }
+        })
+
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    private fun deleteDagelijkseMedicatie() {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("Bent u zeker dat u dit medicijn wil verwijderen?")
+        alertDialogBuilder.setPositiveButton("Ja") { alertDialogBuilder, _ -> viewModel.removeDagMedVanUser() }
+        alertDialogBuilder.setNegativeButton(android.R.string.no) { _, _ -> null }
+        alertDialogBuilder.show()
     }
 
     private fun addUser() {
@@ -104,7 +120,7 @@ class UserFragment : Fragment() {
         dialog.show()
     }
 
-    private fun addDagelijkseMedicatie() {
+    private fun addDagelijkseMedicatie(dagMedAdapter: DagMedAdapter) {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)

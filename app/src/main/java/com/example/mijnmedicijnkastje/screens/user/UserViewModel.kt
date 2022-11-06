@@ -9,13 +9,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.mijnmedicijnkastje.database.DagelijkseMedicatie
 import com.example.mijnmedicijnkastje.database.User
 import com.example.mijnmedicijnkastje.database.UserDatabaseDAO
-import com.example.mijnmedicijnkastje.database.relations.DagMedAndUser
 import kotlinx.coroutines.launch
 
 class UserViewModel(val database: UserDatabaseDAO, application: Application) :
     AndroidViewModel(application) {
 
-    private val _user = MutableLiveData<User?>()
+    private var _user = MutableLiveData<User?>()
     val user: MutableLiveData<User?>
         get() = _user
 
@@ -47,12 +46,6 @@ class UserViewModel(val database: UserDatabaseDAO, application: Application) :
     val dagmed: MutableLiveData<DagelijkseMedicatie?>
         get() = _dagMed
 
-    private var _dagelijkseMed = database.getAllDagMedAndUser()
-    val dagelijkseMed: LiveData<List<DagMedAndUser>>
-        get() {
-            return _dagelijkseMed
-        }
-
     private var _dagMedVanUser = MutableLiveData<List<DagelijkseMedicatie?>>()
     val dagMedVanUser: MutableLiveData<List<DagelijkseMedicatie?>>
         get() = _dagMedVanUser
@@ -61,26 +54,22 @@ class UserViewModel(val database: UserDatabaseDAO, application: Application) :
     init {
         _addUserClicked.value = false
         _addDagMedClicked.value = false
-        _user.value = User(null, "", "", "")
+        _user.value = null
         _dagMed.value = null
         if (user.value?.id == null) {
             _userSelected.value = false
         }
+        getLstDagelijkseMedVanUser()
     }
 
     fun getLstDagelijkseMedVanUser() {
-//        database.getAllDagMedAndUser()
         viewModelScope.launch {
-            val lst = user.value?.id?.let { database.getDagMedAndUser(it) }
+            if (user.value?.id != null) {
+                _dagMedVanUser.value = user.value!!.id?.let { database.getDagMedAndUser(it) }!!
+            } else {
+                _dagMedVanUser.value = emptyList()
+            }
         }
-//        viewModelScope.launch {
-//            if (user.value?.id != null) {
-//                val lst = user.value!!.id?.let { database.getDagMedAndUser(it) }
-////                _dagMedVanUser.value = user.value!!.id?.let { database.getDagMedAndUser(it) }!!
-//            } else {
-//                _dagMedVanUser.value = emptyList()
-//            }
-//        }
     }
 
     fun clickUser(user: User) {
@@ -91,6 +80,7 @@ class UserViewModel(val database: UserDatabaseDAO, application: Application) :
 
     fun clickDagMed(dagelijkseMedicatie: DagelijkseMedicatie) {
         _dagMed.value = dagelijkseMedicatie
+        Log.i("Julie", _dagMed.value!!.id.toString())
     }
 
     fun btnAddUserClicked() {
@@ -105,8 +95,8 @@ class UserViewModel(val database: UserDatabaseDAO, application: Application) :
         val user = User(null, naam, voornaam, geboortedatum)
         viewModelScope.launch {
             database.insert(user)
+            _user.value = database.getUserByName(voornaam)
         }
-        _user.value = user
         _userSelected.value = true
     }
 
@@ -115,20 +105,23 @@ class UserViewModel(val database: UserDatabaseDAO, application: Application) :
             user.value?.let { database.delete(it) }
         }
         _user.value = null
+        _dagMedVanUser.value = emptyList()
+        _userSelected.value = false
     }
 
     fun addDagMedVanUser(naamMed: String, tijdstip: String) {
         val dagelijkseMedicatie = DagelijkseMedicatie(null, user.value?.id, naamMed, tijdstip)
-        Log.i("Julie", user.value?.id.toString())
         viewModelScope.launch {
             database.insertDagMed(dagelijkseMedicatie)
         }
+        getLstDagelijkseMedVanUser()
     }
 
-    fun removeDagMedVanUser(dagelijkseMedicatie: DagelijkseMedicatie) {
+    fun removeDagMedVanUser() {
         viewModelScope.launch {
-            database.deleteDagMed(dagelijkseMedicatie)
+            dagmed.value?.let { database.deleteDagMed(it) }
         }
+        getLstDagelijkseMedVanUser()
     }
 
 }

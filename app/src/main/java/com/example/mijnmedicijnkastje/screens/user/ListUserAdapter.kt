@@ -29,7 +29,6 @@ class ListUserAdapter(val clickListener: UserClickListener) :
         ) {
             binding.user = user
             binding.clickListener = clickListener
-//            itembinding.clickListener = clickListener
             binding.executePendingBindings()
         }
 

@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 data class User(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Int? = null,
+    var id: Int? = null,
 
     @ColumnInfo(name = "naam")
     var naam: String? = null,

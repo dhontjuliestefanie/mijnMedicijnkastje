@@ -2,7 +2,6 @@ package com.example.mijnmedicijnkastje.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.mijnmedicijnkastje.database.relations.DagMedAndUser
 
 @Dao
 interface UserDatabaseDAO {
@@ -29,10 +28,10 @@ interface UserDatabaseDAO {
 
     @Transaction
     @Query("SELECT * FROM dag_med_table where idUser = :key")
-    suspend fun getDagMedAndUser(key: Int): List<DagMedAndUser>
+    suspend fun getDagMedAndUser(key: Int): List<DagelijkseMedicatie>
 
     @Transaction
     @Query("SELECT * FROM dag_med_table")
-    fun getAllDagMedAndUser(): LiveData<List<DagMedAndUser>>
+    fun getAllDagMedAndUser(): LiveData<List<DagelijkseMedicatie>>
 
 }
